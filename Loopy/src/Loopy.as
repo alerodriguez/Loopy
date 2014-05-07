@@ -1,0 +1,22 @@
+package
+{
+	import flash.display.Sprite;
+	
+	import Screens.Game;
+	
+	import starling.core.Starling;
+	
+	[SWF(frameRate="60", width="800", height="600", backgroundColor="0x333333")]
+	public class Loopy extends Sprite
+	{
+		
+		private var myStarling:Starling;
+		
+		public function Loopy()
+		{
+			myStarling = new Starling(Game, stage);
+			myStarling.antiAliasing = 1;
+			myStarling.start();
+		}
+	}
+}
