@@ -24,40 +24,42 @@ package
 		[Embed(source="../media/graphics/background_01.jpg")]
 		public static const LOOPY_SPLASH:Class;
 		
-		private var myStarling:Starling;
+		private var _starlingFramework:Starling;
 		private var _splashTexture:Bitmap;
 		
 		public function Loopy()
 		{
-			
 			stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGING, onOrientationChanging);
 			
 			// support autoOrients
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
-			var screenWidth:int  = stage.fullScreenWidth;
-			var screenHeight:int = stage.fullScreenHeight;
-			var viewPort:Rectangle = new Rectangle(0, 0, screenWidth, screenHeight);
-			
-			myStarling = new Starling(Game, stage, viewPort);
-			myStarling.stage3D.addEventListener(starling.events.Event.CONTEXT3D_CREATE, removeSplash);
-			
-			// Point: x: height, y: width
-			var starlingResolution:Point = ResolutionController.adjustResolution();
-			myStarling.stage.stageHeight  = starlingResolution.x;
-			myStarling.stage.stageWidth   = starlingResolution.y;
-			
-			myStarling.antiAliasing = 1;
-			myStarling.start();
-			
 			NativeApplication.nativeApplication.addEventListener(flash.events.Event.ACTIVATE, onApplicationActive);
 			NativeApplication.nativeApplication.addEventListener(flash.events.Event.DEACTIVATE, onApplicationDeactive);
 			NativeApplication.nativeApplication.systemIdleMode = SystemIdleMode.KEEP_AWAKE;
 			
+			addStarlingFramework();
 			addSlpash();
 		}
 		
+		private function addStarlingFramework():void
+		{
+			var screenWidth:int  = stage.fullScreenWidth;
+			var screenHeight:int = stage.fullScreenHeight;
+			var viewPort:Rectangle = new Rectangle(0, 0, screenWidth, screenHeight);
+			var starlingResolution:Point;
+			
+			_starlingFramework = new Starling(Game, stage, viewPort);
+			_starlingFramework.stage3D.addEventListener(starling.events.Event.CONTEXT3D_CREATE, removeSplash);
+			
+			starlingResolution = ResolutionController.adjustResolution();
+			_starlingFramework.stage.stageHeight  = starlingResolution.x;
+			_starlingFramework.stage.stageWidth   = starlingResolution.y;
+			
+			_starlingFramework.antiAliasing = 1;
+			_starlingFramework.start();
+		}
 		
 		
 		private function addSlpash():void
@@ -94,7 +96,7 @@ package
 		
 		private function removeSplash(e:flash.events.Event):void
 		{
-			myStarling.stage3D.removeEventListener(starling.events.Event.CONTEXT3D_CREATE, removeSplash);
+			_starlingFramework.stage3D.removeEventListener(starling.events.Event.CONTEXT3D_CREATE, removeSplash);
 			stage.removeEventListener(flash.events.Event.RESIZE, centerSplash);
 			this.removeChild(_splashTexture);
 		}
@@ -119,12 +121,12 @@ package
 		
 		protected function onApplicationActive(event:flash.events.Event):void
 		{
-			myStarling.start();
+			_starlingFramework.start();
 		}
 		
 		protected function onApplicationDeactive(event:flash.events.Event):void
 		{
-			myStarling.stop();
+			_starlingFramework.stop();
 			stage.focus = null;
 		}
 	}
