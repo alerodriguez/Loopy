@@ -10,6 +10,9 @@ package Assets
 		[Embed(source="../../media/graphics/background_01.jpg")]
 		public static const background_01:Class;
 		
+		[Embed(source="../../media/graphics/background_02.jpg")]
+		public static const background_02:Class;
+		
 		public static var gameTextures:Dictionary = new Dictionary();
 		
 		public static function getTexture(name:String):Texture

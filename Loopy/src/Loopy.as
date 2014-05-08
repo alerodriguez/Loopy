@@ -12,7 +12,7 @@ package
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import Screens.Game;
+	import States.Game;
 	
 	import starling.core.Starling;
 	import starling.events.Event;
