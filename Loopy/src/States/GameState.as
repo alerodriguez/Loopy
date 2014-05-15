@@ -7,7 +7,6 @@ package States
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -20,7 +19,7 @@ package States
 		public function GameState(name:String, parentFSM:FSM, scene:Sprite)
 		{
 			super(name, parentFSM, scene);
-			_bg = new Image(AssetsManager.getTexture("background_02"));
+			_bg = new Image(AssetsManager.getAtlas("mainAtlas").getTexture("001"));
 		}
 		
 		public override function onEnter():void
