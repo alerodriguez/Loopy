@@ -21,7 +21,7 @@ package
 	public class Loopy extends Sprite
 	{
 		
-		[Embed(source="../media/graphics/001.png")]
+		[Embed(source="../media/graphics/MainAtlas/001.png")]
 		public static const LOOPY_SPLASH:Class;
 		
 		private var _starlingFramework:Starling;

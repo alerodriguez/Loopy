@@ -14,6 +14,12 @@ package Assets
 		[Embed(source="../../media/textures/maintexture.xml", mimeType="application/octet-stream")]
 		public static const mainAtlasXML:Class;
 		
+		[Embed(source="../../media/textures/SquareAtlas.png")]
+		public static const SquareAtlasTexture:Class;
+		
+		[Embed(source="../../media/textures/SquareAtlas.xml", mimeType="application/octet-stream")]
+		public static const SquareAtlasXML:Class;
+		
 		public static var gameTextures:Dictionary = new Dictionary();
 		public static var gameXMLs:Dictionary = new Dictionary();
 		public static var gameAtlas:Dictionary = new Dictionary();

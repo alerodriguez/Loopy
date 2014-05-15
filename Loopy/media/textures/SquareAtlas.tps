@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.3.4</string>
         <key>fileName</key>
-        <string>D:/Desktop/Diseño/II Progra/Loopy/Loopy/media/textures/maintexture.tps</string>
+        <string>D:/Desktop/Diseño/II Progra/Loopy/Loopy/media/textures/SquareAtlas.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -38,7 +38,7 @@
         <key>dataFormat</key>
         <string>sparrow</string>
         <key>textureFileName</key>
-        <filename>maintexture.png</filename>
+        <filename>SquareAtlas.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>ditherType</key>
@@ -131,7 +131,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>maintexture.xml</filename>
+                <filename>SquareAtlas.xml</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -172,7 +172,7 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../graphics/MainAtlas</filename>
+            <filename>../graphics/SquareAtlas</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

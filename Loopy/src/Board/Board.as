@@ -1,6 +1,8 @@
 package Board
 {
-	public class Board
+	import starling.display.DisplayObjectContainer;
+
+	public class Board extends DisplayObjectContainer
 	{
 		
 		private var _selectedSquare:Square = null;
@@ -14,6 +16,7 @@ package Board
 		private var _goldenPenalization:Number;
 		private var _normalPrize:Number;
 		private var _normalPenalization:Number;
+		private var _score:Number;
 		
 		public function get IsPaused():Boolean
 		{
@@ -33,6 +36,24 @@ package Board
 			_goldenPenalization = -25;
 			_normalPrize = 5;
 			_normalPenalization = -7;
+			
+			_score = 0;
+			
+			Initialize();
+		}
+		
+		private function Initialize():void
+		{
+			_squares = new Array();
+			
+			for (var i:int = 0; i < 8; i++) 
+			{
+				for (var j:int = 0; j < 8; j++) 
+				{
+					_squares.push(new Square(this, i, j, Math.floor(Math.random()*3)));
+				}
+				
+			}
 		}
 		
 		public function TapSquare(square:Square):void
@@ -63,7 +84,7 @@ package Board
 		
 		private function isAdjacent(firstSquare:Square, secondSquare:Square):Boolean
 		{
-			var xDistance:Number = Math.abs(firstSquare.XPosition - secondSquare.YPosition);
+			var xDistance:Number = Math.abs(firstSquare.XPosition - secondSquare.XPosition);
 			var yDistance:Number = Math.abs(firstSquare.YPosition - secondSquare.YPosition);
 			return (xDistance + yDistance == 1);
 		}
@@ -84,6 +105,9 @@ package Board
 				score += isCurrAtCicle ? getPenalization(currentSquare) : getPrize(currentSquare);
 				score += isOtherAtCicle ? getPenalization(otherSquare) : getPrize(currentSquare);
 			}
+			
+			_score += score;
+			trace("Score: " + _score);
 			
 			currentSquare.MoveTo(otherXPos, otherYPos);
 			otherSquare.MoveTo(currXPos, currYPos);

@@ -2,6 +2,8 @@ package States
 {	
 	import Assets.AssetsManager;
 	
+	import Board.Board;
+	
 	import StateMachine.FSM;
 	import StateMachine.State;
 	
@@ -15,17 +17,23 @@ package States
 	{
 		private var _bg:Image;
 		private var _isClickedEnter:Boolean = false;
+		private var _board:Board;
 
 		public function GameState(name:String, parentFSM:FSM, scene:Sprite)
 		{
 			super(name, parentFSM, scene);
 			_bg = new Image(AssetsManager.getAtlas("mainAtlas").getTexture("001"));
+			_board = new Board();
 		}
 		
 		public override function onEnter():void
 		{
 			_scene.addChild(_bg);
-			_scene.addEventListener(starling.events.TouchEvent.TOUCH, onTouch);
+			_scene.addChild(_board);
+			
+			ResolutionController.dockObject(_board, ResolutionController.CENTER, 0, ResolutionController.CENTER, 0);
+			
+			_bg.addEventListener(starling.events.TouchEvent.TOUCH, onTouch);
 		}
 		
 		public override function onExit():void
