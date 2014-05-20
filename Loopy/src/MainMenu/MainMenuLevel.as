@@ -67,26 +67,16 @@ package MainMenu
 			}
 			
 			_startButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(UP_TEXTURE), "Iniciar");
-			
-			if(_editable)
-			{
-				_editButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(UP_TEXTURE), "Editar");
-				_editButton.addEventListener(Event.TRIGGERED, _editHandler);
-			}
-			else
-			{
-				_editButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(DISABLED_TEXTURE), "Editar");
-			}
-			
+			_editButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(UP_TEXTURE), "Editar");
 			_editButton.enabled = _editable;
 			
 			_editButton.x = BUTTON_X_OFFSET;
 			_startButton.x = this.width - BUTTON_X_OFFSET - _startButton.width;
-			
 			_editButton.y = this.height + BUTTON_Y_OFFSET;
 			_startButton.y = this.height + BUTTON_Y_OFFSET;
 			
 			_startButton.addEventListener(Event.TRIGGERED, _startHandler);
+			_editButton.addEventListener(Event.TRIGGERED, _editHandler);
 			
 			this.addChild(_editButton);
 			this.addChild(_startButton);
