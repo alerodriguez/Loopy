@@ -112,6 +112,7 @@ package Board
 		public function Select():void
 		{
 			_squareImage.alpha = 0.5;
+			trace(Type + " " + IsCorrect);
 		}
 		
 		public function DeSelect():void

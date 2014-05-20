@@ -1,7 +1,5 @@
 package Board
-{
-	import flash.text.ReturnKeyLabel;
-	
+{	
 	import starling.display.DisplayObjectContainer;
 
 	public class Board extends DisplayObjectContainer
@@ -172,8 +170,8 @@ package Board
 		
 		private function moveSquares(currentSquare:Square, otherSquare:Square):void
 		{
-			var isCurrAtCicle:Boolean = isAtCycle(currentSquare);
-			var isOtherAtCicle:Boolean = isAtCycle(otherSquare);
+			var isCurrAtCicle:Boolean = currentSquare.IsCorrect;
+			var isOtherAtCicle:Boolean = otherSquare.IsCorrect;
 			var score:Number = currentSquare.XPosition == otherSquare.XPosition ? _hPenalization : _vPenalization;
 			
 			var currXPos:Number = currentSquare.XPosition;
@@ -184,11 +182,14 @@ package Board
 			if((isCurrAtCicle && !isOtherAtCicle) || (!isCurrAtCicle && isOtherAtCicle))
 			{
 				score += isCurrAtCicle ? getPenalization(currentSquare) : getPrize(currentSquare);
-				score += isOtherAtCicle ? getPenalization(otherSquare) : getPrize(currentSquare);
+				score += isOtherAtCicle ? getPenalization(otherSquare) : getPrize(otherSquare);
 			}
 			
 			_score += score;
 			trace("Score: " + _score);
+			
+			currentSquare.IsCorrect = isOtherAtCicle;
+			otherSquare.IsCorrect = isCurrAtCicle;
 			
 			currentSquare.MoveTo(otherXPos, otherYPos);
 			otherSquare.MoveTo(currXPos, currYPos);
@@ -228,11 +229,6 @@ package Board
 					break;
 			}
 			return score;
-		}
-		
-		private function isAtCycle(square:Square):Boolean
-		{
-			return false;
 		}
 	}
 }

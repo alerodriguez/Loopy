@@ -39,6 +39,7 @@ package States
 		public override function onExit():void
 		{
 			_scene.removeChild(_bg);
+			_scene.removeChild(_board);
 			_isClickedEnter = false;
 		}
 		
