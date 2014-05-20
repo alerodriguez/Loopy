@@ -8,7 +8,6 @@ package Board
 		private var _selectedSquare:Square = null;
 		private var _isPaused:Boolean = false;
 		private var _squares:Array;
-		private var _cicle:Array;
 		private var _percentageCompleted:Number = 0;
 		private var _vPenalization:Number;
 		private var _hPenalization:Number;
@@ -17,6 +16,94 @@ package Board
 		private var _normalPrize:Number;
 		private var _normalPenalization:Number;
 		private var _score:Number;
+		
+		//Variables para cada tabla de juego
+		private var _MinimoCompletado:Number = 50;
+		private var _MaximoCompletado:Number = 60;
+		private var _PuntajeInicial:Number = 200;
+		private var _CantidadActual:Number = 0;
+		private var _EspacioCorrecto:Number = 16;
+		private var _tablaInicial:Array =
+			[
+				[0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0],
+				[0,0,1,1,1,1,0,0],
+				[0,0,1,1,1,1,0,0],
+				[0,0,1,1,1,1,0,0],
+				[0,0,1,1,1,1,0,0],
+				[0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0]
+			]
+		
+		
+		
+		public function FillBoard():void
+		{
+			_squares = new Array();
+			//Cantidad de fichas dentro de la zona correcta (cantidad minima + random entre la diferencia del minimo y maximo
+			var _CantidadDentro:Number = Math.floor(_EspacioCorrecto*(_MinimoCompletado/100)) + Math.floor(Math.random()*(_EspacioCorrecto*((_MaximoCompletado-_MinimoCompletado)/100)));
+			var _CantidadFuera:Number = _EspacioCorrecto - _CantidadDentro + Math.floor(Math.random()*5);
+			var _ProbCorrectaFuera:Number = (100/(64 - _EspacioCorrecto)) * _CantidadFuera;
+			var _ProbCorrectaDentro:Number = (100 / _EspacioCorrecto) * _CantidadDentro;
+			var _EspacioCorrectoRestante:Number = _EspacioCorrecto;
+			var _EspacioIncorrectoRestante:Number = 64 - _EspacioCorrecto;
+			var _IsCorrect:Boolean;
+			for (var i:int = 0; i < 8; i++) 
+			{
+				for (var j:int = 0; j < 8; j++) 
+				{
+					_IsCorrect = _tablaInicial[i][j];
+					if(_IsCorrect) //está en la misma fila
+					{
+						_EspacioCorrectoRestante--;
+						if(_CantidadDentro <= 0)
+						{
+							_squares.push(new Square(this, i, j, 2));
+							continue;
+						}
+						if(_CantidadDentro > _EspacioCorrectoRestante)
+						{
+							_squares.push(new Square(this, i, j, 1));
+							_CantidadDentro--;
+							continue;
+						}
+						if(Math.random() <= (_ProbCorrectaDentro/100))
+						{
+							_squares.push(new Square(this, i, j, 1));
+							_CantidadDentro--;
+						}
+						else
+						{
+							_squares.push(new Square(this, i, j, 2));
+						}
+					}
+					else
+					{
+						_EspacioIncorrectoRestante--;
+						if(_CantidadFuera <= 0)
+						{
+							_squares.push(new Square(this, i, j, 2));
+							continue;
+						}
+						if(_CantidadFuera > _EspacioIncorrectoRestante)
+						{
+							_squares.push(new Square(this, i, j, 1));
+							_CantidadFuera--;
+							continue;
+						}
+						if(Math.random() <= (_ProbCorrectaFuera/100))
+						{
+							_squares.push(new Square(this, i, j, 1));
+							_CantidadFuera--;
+						}
+						else
+						{
+							_squares.push(new Square(this, i, j, 2));
+						}
+					}
+				}
+			}
+		}
 		
 		public function get IsPaused():Boolean
 		{
@@ -39,7 +126,8 @@ package Board
 			
 			_score = 0;
 			
-			Initialize();
+			//Initialize();
+			FillBoard();
 		}
 		
 		private function Initialize():void

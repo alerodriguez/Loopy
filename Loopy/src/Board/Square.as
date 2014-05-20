@@ -22,6 +22,7 @@ package Board
 		private var _type:int;
 		private var _squareImage:Image;
 		
+		
 		public function get XPosition():Number
 		{
 			return _xPosition;
