@@ -2,7 +2,7 @@ package States
 {	
 	import Assets.AssetsManager;
 	
-	import MainMenu.MainMenuLevel;
+	import MainMenu.MainMenuLevelSlider;
 	
 	import StateMachine.FSM;
 	import StateMachine.State;
@@ -16,21 +16,18 @@ package States
 	public class MainMenuState extends State
 	{
 		private const FONT_NAME:String = "PixelSplitter";
-		private const CONFIG_XML:String = "BoardsConfigXML";
 		private const TITTLE_TEXT:String = "LOOPY";
 		
 		private var _isClickedEnter:Boolean = false;
 		private var _titleTextField:TextField;
-		private var _mainMenuConfig:XML;
 		
-		private var _temporalLevel:MainMenuLevel;
+		private var _levelSlider:MainMenuLevelSlider;
 
 		public function MainMenuState(name:String, parentFSM:FSM, scene:Sprite)
 		{
 			super(name, parentFSM, scene);
 			
 			AssetsManager.registerBitmapFont(FONT_NAME);
-			_mainMenuConfig = AssetsManager.getXML(CONFIG_XML);
 			
 			_titleTextField = new TextField(1000, 1000, "", FONT_NAME, 30, 0x000000);
 			_titleTextField.batchable = true;
@@ -49,25 +46,14 @@ package States
 		}
 		
 		private function createMenu():void
-		{
-			var id:String = _mainMenuConfig.child("board")[0].@id;
-			var name:String = _mainMenuConfig.child("board")[0].@name;
-			var scores:Array = new Array();
-			
-			for each (var score:XML in _mainMenuConfig.child("board")[0].child("score"))
-			{
-				scores.push(score.@value);
-			}
-			
-			_temporalLevel = new MainMenuLevel(id, name, scores, onButtonStartDown);
-			_scene.addChild(_temporalLevel);
-			
-			ResolutionController.dockObject(_temporalLevel, ResolutionController.CENTER, 0, ResolutionController.CENTER, -50);
+		{			
+			_levelSlider = new MainMenuLevelSlider(onButtonStartDown);
+			_scene.addChild(_levelSlider);
 		}
 		
 		private function destroyMenu():void
 		{
-			_scene.removeChild(_temporalLevel);
+			_scene.removeChild(_levelSlider);
 		}
 		
 		public override function onExit():void

@@ -13,4 +13,18 @@
 		<score rank="4" value="1"/>
 		<score rank="5" value="0"/>
 	</board>
+	<board id="2" name="Ciclo Madre 2">
+		<score rank="1" value="4"/>
+		<score rank="2" value="3"/>
+		<score rank="3" value="2"/>
+		<score rank="4" value="1"/>
+		<score rank="5" value="0"/>
+	</board>
+	<board id="3" name="Ciclo Madre 3">
+		<score rank="1" value="4"/>
+		<score rank="2" value="3"/>
+		<score rank="3" value="2"/>
+		<score rank="4" value="1"/>
+		<score rank="5" value="0"/>
+	</board>
 </Boards>
