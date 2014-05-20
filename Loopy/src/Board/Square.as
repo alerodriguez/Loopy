@@ -21,6 +21,7 @@ package Board
 		private var _yPosition:Number;
 		private var _type:int;
 		private var _squareImage:Image;
+		private var _isCorrect:Boolean;
 		
 		
 		public function get XPosition():Number
@@ -53,12 +54,23 @@ package Board
 			_yPosition = _type;
 		}
 		
-		public function Square(parent:Board, xPosition:Number, yPosition:Number, type:int)
+		public function get IsCorrect():Boolean
+		{
+			return _isCorrect;
+		}
+		
+		public function set IsCorrect(value:Boolean):void
+		{
+			_isCorrect = value;
+		}
+		
+		public function Square(parent:Board, xPosition:Number, yPosition:Number, type:int, isCorrect:Boolean = false)
 		{
 			_parent = parent;
 			_xPosition = xPosition;
 			_yPosition = yPosition;
 			_type = type;
+			_isCorrect = isCorrect;
 			
 			Initialize();
 		}

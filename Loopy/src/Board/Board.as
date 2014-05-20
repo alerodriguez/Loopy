@@ -63,13 +63,13 @@ package Board
 						}
 						if(_CantidadDentro > _EspacioCorrectoRestante)
 						{
-							_squares.push(new Square(this, i, j, 1));
+							_squares.push(new Square(this, i, j, 1, true));
 							_CantidadDentro--;
 							continue;
 						}
 						if(Math.random() <= (_ProbCorrectaDentro/100))
 						{
-							_squares.push(new Square(this, i, j, 1));
+							_squares.push(new Square(this, i, j, 1, true));
 							_CantidadDentro--;
 						}
 						else
@@ -87,13 +87,13 @@ package Board
 						}
 						if(_CantidadFuera > _EspacioIncorrectoRestante)
 						{
-							_squares.push(new Square(this, i, j, 1));
+							_squares.push(new Square(this, i, j, 1, true));
 							_CantidadFuera--;
 							continue;
 						}
 						if(Math.random() <= (_ProbCorrectaFuera/100))
 						{
-							_squares.push(new Square(this, i, j, 1));
+							_squares.push(new Square(this, i, j, 1, true));
 							_CantidadFuera--;
 						}
 						else
