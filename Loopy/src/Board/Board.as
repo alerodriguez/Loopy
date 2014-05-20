@@ -1,5 +1,7 @@
 package Board
 {
+	import flash.text.ReturnKeyLabel;
+	
 	import starling.display.DisplayObjectContainer;
 
 	public class Board extends DisplayObjectContainer
@@ -48,6 +50,7 @@ package Board
 			var _EspacioCorrectoRestante:Number = _EspacioCorrecto;
 			var _EspacioIncorrectoRestante:Number = 64 - _EspacioCorrecto;
 			var _IsCorrect:Boolean;
+			var _probTemp:Number;
 			for (var i:int = 0; i < 8; i++) 
 			{
 				for (var j:int = 0; j < 8; j++) 
@@ -57,51 +60,41 @@ package Board
 					{
 						_EspacioCorrectoRestante--;
 						if(_CantidadDentro <= 0)
-						{
-							_squares.push(new Square(this, i, j, 2));
-							continue;
-						}
-						if(_CantidadDentro > _EspacioCorrectoRestante)
-						{
-							_squares.push(new Square(this, i, j, 1, true));
+							_probTemp = 0;
+						else if(_CantidadDentro > _EspacioCorrectoRestante)
+							_probTemp = 100;
+						else if(Math.random() <= (_ProbCorrectaDentro/100))
+							_probTemp = _ProbCorrectaDentro;
+						if(addSquare(i, j, _probTemp, true))
 							_CantidadDentro--;
-							continue;
-						}
-						if(Math.random() <= (_ProbCorrectaDentro/100))
-						{
-							_squares.push(new Square(this, i, j, 1, true));
-							_CantidadDentro--;
-						}
-						else
-						{
-							_squares.push(new Square(this, i, j, 2));
-						}
 					}
 					else
 					{
 						_EspacioIncorrectoRestante--;
 						if(_CantidadFuera <= 0)
-						{
-							_squares.push(new Square(this, i, j, 2));
-							continue;
-						}
+							_probTemp = 0;
 						if(_CantidadFuera > _EspacioIncorrectoRestante)
-						{
-							_squares.push(new Square(this, i, j, 1, true));
-							_CantidadFuera--;
-							continue;
-						}
+							_probTemp = 100;
 						if(Math.random() <= (_ProbCorrectaFuera/100))
-						{
-							_squares.push(new Square(this, i, j, 1, true));
+							_probTemp = _ProbCorrectaFuera
+						if(addSquare(i, j, _probTemp, false))
 							_CantidadFuera--;
-						}
-						else
-						{
-							_squares.push(new Square(this, i, j, 2));
-						}
 					}
 				}
+			}
+		}
+		
+		public function addSquare(posX:Number, posY:Number, prob:Number, correct:Boolean):Boolean
+		{
+			if(Math.random() <= (prob/100))
+			{
+				_squares.push(new Square(this, posY, posX, 1, correct));
+				return true;
+			}
+			else
+			{
+				_squares.push(new Square(this, posY, posX, 2, correct));
+				return false;
 			}
 		}
 		
