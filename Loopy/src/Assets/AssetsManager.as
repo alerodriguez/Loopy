@@ -3,6 +3,8 @@ package Assets
 	import flash.display.Bitmap;
 	import flash.utils.Dictionary;
 	
+	import starling.text.BitmapFont;
+	import starling.text.TextField;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 
@@ -20,9 +22,19 @@ package Assets
 		[Embed(source="../../media/textures/SquareAtlas.xml", mimeType="application/octet-stream")]
 		public static const SquareAtlasXML:Class;
 		
+		[Embed(source="../../media/fonts/font.png")]
+		public static const PixelSplitterTexture:Class;
+		
+		[Embed(source="../../media/fonts/font.fnt", mimeType="application/octet-stream")]
+		public static const PixelSplitterXML:Class;
+		
+		[Embed(source="../../config/BoardsConfig.xml", mimeType="application/octet-stream")]
+		public static const BoardsConfigXML:Class;
+		
 		public static var gameTextures:Dictionary = new Dictionary();
 		public static var gameXMLs:Dictionary = new Dictionary();
 		public static var gameAtlas:Dictionary = new Dictionary();
+		public static var fontAtlas:Dictionary = new Dictionary();
 		
 		public static function getTexture(name:String):Texture
 		{
@@ -53,6 +65,18 @@ package Assets
 				gameAtlas[name] = new TextureAtlas(texture, xml);
 			}
 			return gameAtlas[name];
+		}
+		
+		public static function registerBitmapFont(name:String):void
+		{
+			if(fontAtlas[name] == undefined)
+			{
+				var texture:Texture = getTexture(name + "Texture");
+				var xml:XML = getXML(name + "XML");
+				
+				TextField.registerBitmapFont(new BitmapFont(texture, xml));
+				fontAtlas[name] = true;
+			}
 		}
 	}
 }

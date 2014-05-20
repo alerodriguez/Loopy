@@ -17,7 +17,7 @@ package
 	import starling.core.Starling;
 	import starling.events.Event;
 	
-	[SWF(frameRate="60", width="1024", height="768", backgroundColor="0x000000")]
+	[SWF(frameRate="60", width="1024", height="768", backgroundColor="0xFFFFFF")]
 	public class Loopy extends Sprite
 	{
 		
