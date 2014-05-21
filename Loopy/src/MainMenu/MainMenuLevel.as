@@ -2,6 +2,8 @@ package MainMenu
 {
 	import Assets.AssetsManager;
 	
+	import Board.BoardConfigurationManager;
+	
 	import starling.display.Button;
 	import starling.display.DisplayObjectContainer;
 	import starling.events.Event;
@@ -11,9 +13,9 @@ package MainMenu
 	
 	public class MainMenuLevel extends DisplayObjectContainer
 	{
-		private const ATLAS:String = "SquareAtlas";
-		private const UP_TEXTURE:String = "001";
-		private const DISABLED_TEXTURE:String = "002";
+		private const ATLAS:String = "ButtonAtlas";
+		private const EDIT_TEXTURE:String = "000";
+		private const PLAY_TEXTURE:String = "005";
 		
 		private const SCORES_OFFSET:Number = 40;
 		private const SCORES_PADDING:Number = 50;
@@ -30,6 +32,7 @@ package MainMenu
 		
 		private var _nameTextField:TextField;
 		private var _scoresTextFields:Array;
+		private var _scoresValuesTextFields:Array;
 		private var _startButton:Button;
 		private var _editButton:Button;
 		
@@ -55,19 +58,31 @@ package MainMenu
 			this.addChild(_nameTextField);
 			
 			_scoresTextFields = new Array();
+			_scoresValuesTextFields = new Array();
 			for (var index:int = 0; index < _scores.length; index++)
 			{
-				var scoreText:String = (index + 1) + " Lugar: " + _scores[index].toString()
-				_scoresTextFields.push(new TextField(500, 40, scoreText, "font", 30, 0x000000));
+				var scoreText:String = (index + 1) + " Lugar: "; 
+				_scoresTextFields.push(new TextField(200, 40, scoreText, "font", 30, 0x000000));
+				_scoresValuesTextFields.push(new TextField(300, 40, _scores[index].toString(), "font", 30, 0x000000));
+				
 				_scoresTextFields[index].batchable = true;
 				_scoresTextFields[index].vAlign = VAlign.TOP;
 				_scoresTextFields[index].hAlign = HAlign.LEFT;
 				_scoresTextFields[index].y = SCORES_PADDING + index * SCORES_OFFSET;
+				_scoresTextFields[index].x = SCORES_OFFSET;
+				
+				_scoresValuesTextFields[index].batchable = true;
+				_scoresValuesTextFields[index].vAlign = VAlign.TOP;
+				_scoresValuesTextFields[index].hAlign = HAlign.RIGHT;
+				_scoresValuesTextFields[index].y = SCORES_PADDING + index * SCORES_OFFSET;
+				_scoresValuesTextFields[index].x = width - SCORES_OFFSET - _scoresValuesTextFields[index].width;
+				
 				this.addChild(_scoresTextFields[index]);
+				this.addChild(_scoresValuesTextFields[index]);
 			}
 			
-			_startButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(UP_TEXTURE), "Iniciar");
-			_editButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(UP_TEXTURE), "Editar");
+			_startButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(PLAY_TEXTURE), "");
+			_editButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(EDIT_TEXTURE), "");
 			_editButton.enabled = _editable;
 			
 			_editButton.x = BUTTON_X_OFFSET;
@@ -75,11 +90,28 @@ package MainMenu
 			_editButton.y = this.height + BUTTON_Y_OFFSET;
 			_startButton.y = this.height + BUTTON_Y_OFFSET;
 			
-			_startButton.addEventListener(Event.TRIGGERED, _startHandler);
-			_editButton.addEventListener(Event.TRIGGERED, _editHandler);
+			_startButton.addEventListener(Event.TRIGGERED, onButtonStartDown);
+			_editButton.addEventListener(Event.TRIGGERED, onButtonEditDown);
 			
 			this.addChild(_editButton);
 			this.addChild(_startButton);
+		}
+		
+		private function onButtonStartDown(event:Event):void
+		{
+			if(_startHandler != null )
+			{
+				BoardConfigurationManager.getInstance().LevelKey = _id;
+				_startHandler();
+			}
+		}
+		
+		private function onButtonEditDown(event:Event):void
+		{
+			if(_editHandler != null)
+			{
+				_editHandler();
+			}
 		}
 	}
 }

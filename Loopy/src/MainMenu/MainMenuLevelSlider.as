@@ -15,8 +15,9 @@ package MainMenu
 		private const X_PADDING:Number = 350;
 		private const Y_PADDING:Number = 200;
 		
-		private const ATLAS:String = "SquareAtlas";
-		private const UP_TEXTURE:String = "001";
+		private const ATLAS:String = "ButtonAtlas";
+		private const LEFT_TEXTURE:String = "008";
+		private const RIGHT_TEXTURE:String = "009";
 		
 		private var _levels:Array;
 		private var _onButtonStartDown:Function;
@@ -72,8 +73,8 @@ package MainMenu
 		
 		private function addButtons():void
 		{
-			_backButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(UP_TEXTURE), "");
-			_nextButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(UP_TEXTURE), "");
+			_backButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(LEFT_TEXTURE), "");
+			_nextButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(RIGHT_TEXTURE), "");
 			
 			_backButton.addEventListener(Event.TRIGGERED, onBackButtonDown);
 			_nextButton.addEventListener(Event.TRIGGERED, onNextButtonDown);

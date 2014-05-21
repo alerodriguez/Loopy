@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:be9c44e1a425c667bf3234fd0e120774:e100f076681ce420a0268545dec56ba7:d597b84d3d9bb3c2e3007f39bdd8b491$ -->
+<TextureAtlas imagePath="ButtonAtlas.png">
+    <SubTexture name="000" x="2" y="2" width="64" height="64"/>
+    <SubTexture name="001" x="68" y="2" width="64" height="64"/>
+    <SubTexture name="002" x="134" y="2" width="64" height="64"/>
+    <SubTexture name="003" x="200" y="2" width="64" height="64"/>
+    <SubTexture name="004" x="266" y="2" width="64" height="64"/>
+    <SubTexture name="005" x="332" y="2" width="64" height="64"/>
+    <SubTexture name="006" x="398" y="2" width="64" height="64"/>
+    <SubTexture name="007" x="2" y="68" width="64" height="64"/>
+    <SubTexture name="008" x="68" y="68" width="64" height="64"/>
+    <SubTexture name="009" x="134" y="68" width="64" height="64"/>
+    <SubTexture name="010" x="200" y="68" width="64" height="64"/>
+    <SubTexture name="011" x="266" y="68" width="64" height="64"/>
+    <SubTexture name="012" x="332" y="68" width="64" height="64"/>
+    <SubTexture name="013" x="398" y="68" width="64" height="64"/>
+</TextureAtlas>

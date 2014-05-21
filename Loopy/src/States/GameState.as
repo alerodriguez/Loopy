@@ -22,12 +22,12 @@ package States
 		public function GameState(name:String, parentFSM:FSM, scene:Sprite)
 		{
 			super(name, parentFSM, scene);
-			_bg = new Image(AssetsManager.getAtlas("mainAtlas").getTexture("001"));
-			_board = new Board();
+			_bg = new Image(AssetsManager.getAtlas("ButtonAtlas").getTexture("010"));
 		}
 		
 		public override function onEnter():void
 		{
+			_board = new Board();
 			_scene.addChild(_bg);
 			_scene.addChild(_board);
 			

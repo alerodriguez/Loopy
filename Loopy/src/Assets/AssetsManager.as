@@ -10,6 +10,12 @@ package Assets
 
 	public class AssetsManager
 	{
+		[Embed(source="../../media/textures/ButtonAtlas.png")]
+		public static const ButtonAtlasTexture:Class;
+		
+		[Embed(source="../../media/textures/ButtonAtlas.xml", mimeType="application/octet-stream")]
+		public static const ButtonAtlasXML:Class;
+		
 		[Embed(source="../../media/textures/maintexture.png")]
 		public static const mainAtlasTexture:Class;
 		

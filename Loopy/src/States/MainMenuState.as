@@ -8,7 +8,6 @@ package States
 	import StateMachine.State;
 	
 	import starling.display.Sprite;
-	import starling.events.Event;
 	import starling.text.TextField;
 	import starling.utils.HAlign;
 	import starling.utils.VAlign;
@@ -64,7 +63,7 @@ package States
 			_isClickedEnter = false;
 		}
 		
-		private function onButtonStartDown(event:Event):void
+		private function onButtonStartDown():void
 		{
 			_isClickedEnter = true;
 		}

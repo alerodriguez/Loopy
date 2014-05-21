@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:b829a7fbce9a1262c4e3b56720c08dc6:662e4a15eb2014f4824a065afe68683e:a6e8f70f69398aaac2fb15f3e3a602ec$ -->
+<!-- $TexturePacker:SmartUpdate:bea50d1ab069e2fcf07345cfad860c1e:5d7521d2c8cce6dbcfb52f1aaa1a3aaf:a6e8f70f69398aaac2fb15f3e3a602ec$ -->
 <TextureAtlas imagePath="SquareAtlas.png">
-    <SubTexture name="000" x="2" y="2" width="64" height="64"/>
-    <SubTexture name="001" x="68" y="2" width="64" height="64"/>
-    <SubTexture name="002" x="134" y="2" width="64" height="64"/>
-    <SubTexture name="003" x="2" y="68" width="64" height="64"/>
+    <SubTexture name="000" x="2" y="2" width="128" height="128"/>
+    <SubTexture name="001" x="132" y="2" width="128" height="128"/>
+    <SubTexture name="002" x="262" y="2" width="128" height="128"/>
+    <SubTexture name="003" x="2" y="132" width="128" height="128"/>
+    <SubTexture name="004" x="132" y="132" width="128" height="128"/>
+    <SubTexture name="005" x="262" y="132" width="128" height="128"/>
+    <SubTexture name="006" x="2" y="262" width="128" height="128"/>
+    <SubTexture name="dark" x="132" y="262" width="128" height="128"/>
 </TextureAtlas>

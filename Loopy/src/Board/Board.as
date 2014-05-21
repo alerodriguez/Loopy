@@ -18,42 +18,68 @@ package Board
 		private var _score:Number;
 		
 		//Variables para cada tabla de juego
-		private var _MinimoCompletado:Number = 50;
-		private var _MaximoCompletado:Number = 60;
-		private var _PuntajeInicial:Number = 200;
+		private var _minCompletionPercentage:Number = 50;
+		private var _maxCompletionPercentage:Number = 60;
 		private var _CantidadActual:Number = 0;
-		private var _EspacioCorrecto:Number = 16;
-		private var _tablaInicial:Array =
-			[
-				[0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0],
-				[0,0,1,1,1,1,0,0],
-				[0,0,1,1,1,1,0,0],
-				[0,0,1,1,1,1,0,0],
-				[0,0,1,1,1,1,0,0],
-				[0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0]
-			]
+		private var _completionTableSize:Number = 16;
+		private var _completionTable:Array;
+		
+		public function get IsPaused():Boolean
+		{
+			return _isPaused;
+		}
+		
+		public function set IsPaused(value:Boolean):void
+		{
+			_isPaused = value;
+		}
+		
+		public function Board()
+		{			
+			Initialize();
+		}
+		
+		private function Initialize():void
+		{
+			var table:Object = BoardConfigurationManager.getInstance().getLevel();
+			
+			_vPenalization = table.verticalPenalization;
+			_hPenalization = table.horizontalPenalization;
+			_goldenPrize = table.goldenPrize;
+			_goldenPenalization = table.goldenPenalization;
+			_normalPrize = table.normalPrize;
+			_normalPenalization = table.normalPenalization;
+			_score = table.initialScore;
+			_minCompletionPercentage = table.minCompletionPercentage;
+			_maxCompletionPercentage = table.maxCompletionPercentage;
+			_completionTableSize = table.completionTableSize;
+			_completionTable = table.completionTable;
+			
+			FillBoard();
+		}
 		
 		
+		/**
+		 * Codigo del mancorro
+		 */
 		
 		public function FillBoard():void
 		{
 			_squares = new Array();
 			//Cantidad de fichas dentro de la zona correcta (cantidad minima + random entre la diferencia del minimo y maximo
-			var _CantidadDentro:Number = Math.floor(_EspacioCorrecto*(_MinimoCompletado/100)) + Math.floor(Math.random()*(_EspacioCorrecto*((_MaximoCompletado-_MinimoCompletado)/100)));
-			var _CantidadFuera:Number = _EspacioCorrecto - _CantidadDentro + Math.floor(Math.random()*5);
-			var _ProbCorrectaFuera:Number = (100/(64 - _EspacioCorrecto)) * _CantidadFuera;
-			var _ProbCorrectaDentro:Number = (100 / _EspacioCorrecto) * _CantidadDentro;
-			var _EspacioCorrectoRestante:Number = _EspacioCorrecto;
-			var _EspacioIncorrectoRestante:Number = 64 - _EspacioCorrecto;
+			var _CantidadDentro:Number = Math.floor(_completionTableSize*(_minCompletionPercentage/100)) + Math.floor(Math.random()*(_completionTableSize*((_maxCompletionPercentage-_minCompletionPercentage)/100)));
+			var _CantidadFuera:Number = _completionTableSize - _CantidadDentro + Math.floor(Math.random()*5);
+			var _ProbCorrectaFuera:Number = (100/(64 - _completionTableSize)) * _CantidadFuera;
+			var _ProbCorrectaDentro:Number = (100 / _completionTableSize) * _CantidadDentro;
+			var _EspacioCorrectoRestante:Number = _completionTableSize;
+			var _EspacioIncorrectoRestante:Number = 64 - _completionTableSize;
 			var _IsCorrect:Boolean;
 			var _probTemp:Number;
 			for (var i:int = 0; i < 8; i++) 
 			{
 				for (var j:int = 0; j < 8; j++) 
 				{
-					_IsCorrect = _tablaInicial[i][j];
+					_IsCorrect = _completionTable[i][j];
 					if(_IsCorrect) //está en la misma fila
 					{
 						_EspacioCorrectoRestante--;
@@ -96,44 +122,10 @@ package Board
 			}
 		}
 		
-		public function get IsPaused():Boolean
-		{
-			return _isPaused;
-		}
+		/**
+		 * Fin del codigo del mancorro
+		 */
 		
-		public function set IsPaused(value:Boolean):void
-		{
-			_isPaused = value;
-		}
-		
-		public function Board()
-		{
-			_vPenalization = -1;
-			_hPenalization = -3;
-			_goldenPrize = 25;
-			_goldenPenalization = -25;
-			_normalPrize = 5;
-			_normalPenalization = -7;
-			
-			_score = 0;
-			
-			//Initialize();
-			FillBoard();
-		}
-		
-		private function Initialize():void
-		{
-			_squares = new Array();
-			
-			for (var i:int = 0; i < 8; i++) 
-			{
-				for (var j:int = 0; j < 8; j++) 
-				{
-					_squares.push(new Square(this, i, j, Math.floor(Math.random()*3)));
-				}
-				
-			}
-		}
 		
 		public function TapSquare(square:Square):void
 		{

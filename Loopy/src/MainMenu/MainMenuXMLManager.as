@@ -43,5 +43,4 @@ package MainMenu
 }
 
 class SingletonKey{
-	
 }
