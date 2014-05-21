@@ -1,5 +1,5 @@
 package Board
-{
+{	
 	import starling.display.DisplayObjectContainer;
 
 	public class Board extends DisplayObjectContainer
@@ -8,7 +8,6 @@ package Board
 		private var _selectedSquare:Square = null;
 		private var _isPaused:Boolean = false;
 		private var _squares:Array;
-		private var _cicle:Array;
 		private var _percentageCompleted:Number = 0;
 		private var _vPenalization:Number;
 		private var _hPenalization:Number;
@@ -17,6 +16,13 @@ package Board
 		private var _normalPrize:Number;
 		private var _normalPenalization:Number;
 		private var _score:Number;
+		
+		//Variables para cada tabla de juego
+		private var _minCompletionPercentage:Number = 50;
+		private var _maxCompletionPercentage:Number = 60;
+		private var _CantidadActual:Number = 0;
+		private var _completionTableSize:Number = 16;
+		private var _completionTable:Array;
 		
 		public function get IsPaused():Boolean
 		{
@@ -29,32 +35,97 @@ package Board
 		}
 		
 		public function Board()
-		{
-			_vPenalization = -1;
-			_hPenalization = -3;
-			_goldenPrize = 25;
-			_goldenPenalization = -25;
-			_normalPrize = 5;
-			_normalPenalization = -7;
-			
-			_score = 0;
-			
+		{			
 			Initialize();
 		}
 		
 		private function Initialize():void
 		{
-			_squares = new Array();
+			var table:Object = BoardConfigurationManager.getInstance().getLevel();
 			
+			_vPenalization = table.verticalPenalization;
+			_hPenalization = table.horizontalPenalization;
+			_goldenPrize = table.goldenPrize;
+			_goldenPenalization = table.goldenPenalization;
+			_normalPrize = table.normalPrize;
+			_normalPenalization = table.normalPenalization;
+			_score = table.initialScore;
+			_minCompletionPercentage = table.minCompletionPercentage;
+			_maxCompletionPercentage = table.maxCompletionPercentage;
+			_completionTableSize = table.completionTableSize;
+			_completionTable = table.completionTable;
+			
+			FillBoard();
+		}
+		
+		
+		/**
+		 * Codigo del mancorro
+		 */
+		
+		public function FillBoard():void
+		{
+			_squares = new Array();
+			//Cantidad de fichas dentro de la zona correcta (cantidad minima + random entre la diferencia del minimo y maximo
+			var _CantidadDentro:Number = Math.floor(_completionTableSize*(_minCompletionPercentage/100)) + Math.floor(Math.random()*(_completionTableSize*((_maxCompletionPercentage-_minCompletionPercentage)/100)));
+			var _CantidadFuera:Number = _completionTableSize - _CantidadDentro + Math.floor(Math.random()*5);
+			var _ProbCorrectaFuera:Number = (100/(64 - _completionTableSize)) * _CantidadFuera;
+			var _ProbCorrectaDentro:Number = (100 / _completionTableSize) * _CantidadDentro;
+			var _EspacioCorrectoRestante:Number = _completionTableSize;
+			var _EspacioIncorrectoRestante:Number = 64 - _completionTableSize;
+			var _IsCorrect:Boolean;
+			var _probTemp:Number;
 			for (var i:int = 0; i < 8; i++) 
 			{
 				for (var j:int = 0; j < 8; j++) 
 				{
-					_squares.push(new Square(this, i, j, Math.floor(Math.random()*3)));
+					_IsCorrect = _completionTable[i][j];
+					if(_IsCorrect) //está en la misma fila
+					{
+						_EspacioCorrectoRestante--;
+						if(_CantidadDentro <= 0)
+							_probTemp = 0;
+						else if(_CantidadDentro > _EspacioCorrectoRestante)
+							_probTemp = 100;
+						else if(Math.random() <= (_ProbCorrectaDentro/100))
+							_probTemp = _ProbCorrectaDentro;
+						if(addSquare(i, j, _probTemp, true))
+							_CantidadDentro--;
+					}
+					else
+					{
+						_EspacioIncorrectoRestante--;
+						if(_CantidadFuera <= 0)
+							_probTemp = 0;
+						if(_CantidadFuera > _EspacioIncorrectoRestante)
+							_probTemp = 100;
+						if(Math.random() <= (_ProbCorrectaFuera/100))
+							_probTemp = _ProbCorrectaFuera
+						if(addSquare(i, j, _probTemp, false))
+							_CantidadFuera--;
+					}
 				}
-				
 			}
 		}
+		
+		public function addSquare(posX:Number, posY:Number, prob:Number, correct:Boolean):Boolean
+		{
+			if(Math.random() <= (prob/100))
+			{
+				_squares.push(new Square(this, posY, posX, 1, correct));
+				return true;
+			}
+			else
+			{
+				_squares.push(new Square(this, posY, posX, 2, correct));
+				return false;
+			}
+		}
+		
+		/**
+		 * Fin del codigo del mancorro
+		 */
+		
 		
 		public function TapSquare(square:Square):void
 		{
@@ -91,8 +162,8 @@ package Board
 		
 		private function moveSquares(currentSquare:Square, otherSquare:Square):void
 		{
-			var isCurrAtCicle:Boolean = isAtCycle(currentSquare);
-			var isOtherAtCicle:Boolean = isAtCycle(otherSquare);
+			var isCurrAtCicle:Boolean = currentSquare.IsCorrect;
+			var isOtherAtCicle:Boolean = otherSquare.IsCorrect;
 			var score:Number = currentSquare.XPosition == otherSquare.XPosition ? _hPenalization : _vPenalization;
 			
 			var currXPos:Number = currentSquare.XPosition;
@@ -103,11 +174,14 @@ package Board
 			if((isCurrAtCicle && !isOtherAtCicle) || (!isCurrAtCicle && isOtherAtCicle))
 			{
 				score += isCurrAtCicle ? getPenalization(currentSquare) : getPrize(currentSquare);
-				score += isOtherAtCicle ? getPenalization(otherSquare) : getPrize(currentSquare);
+				score += isOtherAtCicle ? getPenalization(otherSquare) : getPrize(otherSquare);
 			}
 			
 			_score += score;
 			trace("Score: " + _score);
+			
+			currentSquare.IsCorrect = isOtherAtCicle;
+			otherSquare.IsCorrect = isCurrAtCicle;
 			
 			currentSquare.MoveTo(otherXPos, otherYPos);
 			otherSquare.MoveTo(currXPos, currYPos);
@@ -147,11 +221,6 @@ package Board
 					break;
 			}
 			return score;
-		}
-		
-		private function isAtCycle(square:Square):Boolean
-		{
-			return false;
 		}
 	}
 }

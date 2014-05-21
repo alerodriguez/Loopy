@@ -1,0 +1,37 @@
+<Boards amount="2" score="10">
+	<board id="Nuevo_Ciclo_Valiente" name="Nuevo Ciclo Valiente">
+		<score rank="1" value="4"/>
+		<score rank="2" value="3"/>
+		<score rank="3" value="2"/>
+		<score rank="4" value="1"/>
+		<score rank="5" value="0"/>
+	</board>
+	<board id="Ciclo_Madre" name="Ciclo Madre">
+		<score rank="1" value="4"/>
+		<score rank="2" value="3"/>
+		<score rank="3" value="2"/>
+		<score rank="4" value="1"/>
+		<score rank="5" value="0"/>
+	</board>
+	<board id="Primeros_Ciclos" name="Primeros Ciclos">
+		<score rank="1" value="4"/>
+		<score rank="2" value="3"/>
+		<score rank="3" value="2"/>
+		<score rank="4" value="1"/>
+		<score rank="5" value="0"/>
+	</board>
+	<board id="Popy" name="Popy">
+		<score rank="1" value="4"/>
+		<score rank="2" value="3"/>
+		<score rank="3" value="2"/>
+		<score rank="4" value="1"/>
+		<score rank="5" value="0"/>
+	</board>
+	<board id="Tiempo_Para_La_Escuela" name="Tiempo Para La Escuela">
+		<score rank="1" value="4"/>
+		<score rank="2" value="3"/>
+		<score rank="3" value="2"/>
+		<score rank="4" value="1"/>
+		<score rank="5" value="0"/>
+	</board>
+</Boards>

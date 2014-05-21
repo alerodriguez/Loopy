@@ -14,6 +14,7 @@ package Board
 		private const GOLDEN_TEXTURE:String = "000";
 		private const RIGHT_TEXTURE:String = "001";
 		private const WRONG_TEXTURE:String = "002";
+		private const MASK_TEXTURE:String = "006";
 		private const PADDING_OFFSET:Number = 2;
 		
 		private var _parent:Board;
@@ -21,6 +22,9 @@ package Board
 		private var _yPosition:Number;
 		private var _type:int;
 		private var _squareImage:Image;
+		private var _squareMask:Image;
+		private var _isCorrect:Boolean;
+		
 		
 		public function get XPosition():Number
 		{
@@ -52,12 +56,25 @@ package Board
 			_yPosition = _type;
 		}
 		
-		public function Square(parent:Board, xPosition:Number, yPosition:Number, type:int)
+		public function get IsCorrect():Boolean
+		{
+			return _isCorrect;
+		}
+		
+		public function set IsCorrect(value:Boolean):void
+		{
+			if(value) _squareMask.alpha = 1;
+			else _squareMask.alpha = 0;
+			_isCorrect = value;
+		}
+		
+		public function Square(parent:Board, xPosition:Number, yPosition:Number, type:int, isCorrect:Boolean = false)
 		{
 			_parent = parent;
 			_xPosition = xPosition;
 			_yPosition = yPosition;
 			_type = type;
+			_isCorrect = isCorrect;
 			
 			Initialize();
 		}
@@ -79,8 +96,19 @@ package Board
 					break;
 			}
 			
+			_squareMask = new Image(AssetsManager.getAtlas(ATLAS).getTexture(MASK_TEXTURE));
+			_squareImage.width = 64;
+			_squareImage.height = 64;
+			_squareMask.width = 64;
+			_squareMask.height = 64;
+			
+			
+			if(_isCorrect) _squareMask.alpha = 1;
+			else _squareMask.alpha = 0;
+			
 			_parent.addChild(this);
 			this.addChild(_squareImage);
+			this.addChild(_squareMask);
 			this.x = _squareImage.width * _xPosition + PADDING_OFFSET * (_xPosition - 1);
 			this.y = _squareImage.height * _yPosition + PADDING_OFFSET * (_yPosition - 1);
 			
@@ -98,12 +126,12 @@ package Board
 		
 		public function Select():void
 		{
-			_squareImage.alpha = 0.5;
+			this.alpha = 0.5;
 		}
 		
 		public function DeSelect():void
 		{
-			_squareImage.alpha = 1.0;
+			this.alpha = 1.0;
 		}
 		
 		public function MoveTo(xPosition:Number, yPosition:Number):void
