@@ -87,7 +87,7 @@ package Board
 			var _EspacioCorrectoRestante:Number = _completionTableSize;
 			var _EspacioIncorrectoRestante:Number = 64 - _completionTableSize;
 			var _IsCorrect:Boolean;
-			var _probTemp:Number;
+			var _SquareType:Number;
 			for (var i:int = 0; i < 8; i++) 
 			{
 				for (var j:int = 0; j < 8; j++) 
@@ -97,42 +97,53 @@ package Board
 					{
 						_EspacioCorrectoRestante--;
 						if(_CantidadDentro <= 0)
-							_probTemp = 0;
+							_SquareType = 2;
 						else if(_CantidadDentro > _EspacioCorrectoRestante)
-							_probTemp = 100;
-						else if(Math.random() <= (_ProbCorrectaDentro/100))
-							_probTemp = _ProbCorrectaDentro;
-						if(addSquare(i, j, _probTemp, true))
+						{
+							_SquareType = 1;
 							_CantidadDentro--;
+						}
+						else if(Math.random() <= (_ProbCorrectaDentro/100))
+						{
+							_SquareType = 1;
+							_CantidadDentro--;
+						}
+						else
+						{
+							_SquareType = 2;
+						}
+						_squares.push(new Square(this, j, i, _SquareType, true));
 					}
 					else
 					{
 						_EspacioIncorrectoRestante--;
 						if(_CantidadFuera <= 0)
-							_probTemp = 0;
-						if(_CantidadFuera > _EspacioIncorrectoRestante)
-							_probTemp = 100;
-						if(Math.random() <= (_ProbCorrectaFuera/100))
-							_probTemp = _ProbCorrectaFuera
-						if(addSquare(i, j, _probTemp, false))
+							_SquareType = 2;
+						else if(_CantidadFuera > _EspacioIncorrectoRestante)
+						{
+							_SquareType = 1;
 							_CantidadFuera--;
+						}
+						else if(Math.random() <= (_ProbCorrectaFuera/100))
+						{
+							_SquareType = 1;
+							_CantidadFuera--;
+						}
+						else
+						{
+							_SquareType = 2;
+						}
+						_squares.push(new Square(this, j, i, _SquareType, false));
 					}
 				}
 			}
+			trace(_EspacioCorrectoRestante);
 		}
 		
-		public function addSquare(posX:Number, posY:Number, prob:Number, correct:Boolean):Boolean
+		
+		public function addGoldenSquare():void
 		{
-			if(Math.random() <= (prob/100))
-			{
-				_squares.push(new Square(this, posY, posX, 1, correct));
-				return true;
-			}
-			else
-			{
-				_squares.push(new Square(this, posY, posX, 2, correct));
-				return false;
-			}
+			
 		}
 		
 		/**
