@@ -1,61 +1,147 @@
 package States
 {	
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
+	
 	import Assets.AssetsManager;
 	
 	import Board.Board;
+	import Board.BoardConfigurationManager;
+	
+	import MainMenu.MainMenuXMLManager;
 	
 	import StateMachine.FSM;
 	import StateMachine.State;
 	
-	import starling.display.Image;
+	import starling.display.Button;
 	import starling.display.Sprite;
-	import starling.events.Touch;
-	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
+	import starling.events.Event;
+	import starling.text.TextField;
+	import starling.utils.HAlign;
+	
+	import utils.NumberTextField;
+	import utils.ResolutionController;
 	
 	public class GameState extends State
 	{
-		private var _bg:Image;
-		private var _isClickedEnter:Boolean = false;
+		private const ATLAS:String = "ButtonAtlas";
+		private const LEFT_TEXTURE:String = "008";
+		private const END_TIMER_TIME:Number = 1000;
+		
+		private var _isGameEnded:Boolean = false;
+		private var _isTiming:Boolean = false;
 		private var _board:Board;
+		private var _scoreTxt:NumberTextField;
+		private var _percentageTxt:NumberTextField;
+		private var _backBtn:Button;
+		private var _titleTxt:TextField;
+		private var _endTimer:Timer;
 
 		public function GameState(name:String, parentFSM:FSM, scene:Sprite)
 		{
 			super(name, parentFSM, scene);
-			_bg = new Image(AssetsManager.getAtlas("ButtonAtlas").getTexture("010"));
 		}
 		
 		public override function onEnter():void
 		{
-			_board = new Board();
-			_scene.addChild(_bg);
+			_isTiming = false;
+			_endTimer = new Timer(END_TIMER_TIME);
+			_endTimer.addEventListener(TimerEvent.TIMER, onTimerEnds);
+			
+			_board = new Board(onBoardChangeScore);
+			
+			_titleTxt = new TextField(700, 30, BoardConfigurationManager.getInstance().getLevel().name);
+			_scoreTxt = new NumberTextField(1000, 30, "Puntuación: ");
+			_percentageTxt = new NumberTextField(1000, 30, "Porcentaje: ", "Verdana", 12, 0, "%");
+			_scoreTxt.hAlign = HAlign.LEFT;
+			_percentageTxt.hAlign = HAlign.LEFT;
+			
+			_backBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(LEFT_TEXTURE), "");
+			_backBtn.addEventListener(Event.TRIGGERED, onBackButtonDown);
+			
 			_scene.addChild(_board);
+			_scene.addChild(_backBtn);
+			_scene.addChild(_titleTxt);
+			_scene.addChild(_scoreTxt);
+			_scene.addChild(_percentageTxt);
 			
 			ResolutionController.dockObject(_board, ResolutionController.CENTER, 0, ResolutionController.CENTER, 0);
+			ResolutionController.dockObject(_backBtn, ResolutionController.CENTER, -_board.width/3, ResolutionController.BOTTOM, -10);
+			ResolutionController.dockObject(_titleTxt, ResolutionController.CENTER, 0, ResolutionController.TOP, 10);
+			ResolutionController.dockObject(_scoreTxt, ResolutionController.LEFT, 50, ResolutionController.TOP, 50);
+			ResolutionController.dockObject(_percentageTxt, ResolutionController.LEFT, 50, ResolutionController.TOP, 80);
 			
-			_bg.addEventListener(starling.events.TouchEvent.TOUCH, onTouch);
+			onBoardChangeScore();
 		}
 		
 		public override function onExit():void
 		{
-			_scene.removeChild(_bg);
 			_scene.removeChild(_board);
-			_isClickedEnter = false;
+			_scene.removeChild(_backBtn);
+			_scene.removeChild(_titleTxt);
+			_scene.removeChild(_scoreTxt);
+			_scene.removeChild(_percentageTxt);
+			
+			_isGameEnded = false;
 		}
 		
-		private function onTouch(event:TouchEvent):void
+		private function saveScore():void
 		{
-			var touch:Touch = event.getTouch(_scene);
-			if(touch != null && touch.phase == TouchPhase.ENDED)
+			if(_board == null || _board.Percentage < 100) return;
+			var mainMenu:XML = MainMenuXMLManager.getInstance().MainMenuConfig;
+			for (var i:int = 0; i < mainMenu.children().length(); i++) 
 			{
-				_isClickedEnter = true;
-				_scene.removeEventListener(starling.events.TouchEvent.TOUCH, onTouch);
+				if(mainMenu.children()[i].@id == BoardConfigurationManager.getInstance().LevelKey)
+				{
+					var childLen:Number = mainMenu.children()[i].children().length();
+					for (var j:int = 0; j < childLen; j++)
+					{
+						if(mainMenu.children()[i].children()[j].@value < _board.Score)
+						{
+							var childIndex:Number = j;
+							for(j = childLen - 1; j > childIndex; j--)
+								mainMenu.children()[i].children()[j].@value = mainMenu.children()[i].children()[j - 1].@value;
+							mainMenu.children()[i].children()[childIndex].@value = _board.Score;
+							break;
+						}
+					}
+				}
+			}
+			
+			MainMenuXMLManager.getInstance().MainMenuConfig = mainMenu;
+		}
+		
+		private function onBackButtonDown(event:Event):void
+		{
+			if(_isTiming) return;
+			_isGameEnded = true;
+		}
+		
+		public function onIsGameEnded():Boolean
+		{
+			return _isGameEnded;
+		}
+		
+		private function onBoardChangeScore():void
+		{
+			if(_board != null)
+			{
+				_scoreTxt.Text = _board.Score;
+				_percentageTxt.Text = _board.Percentage;
+				if(_board.Percentage >= 100)
+				{
+					_isTiming = true;
+					_backBtn.enabled = false;
+					_endTimer.start();
+					saveScore();
+				}
 			}
 		}
 		
-		public function onEnterClicked():Boolean
+		private function onTimerEnds(event:TimerEvent):void
 		{
-			return _isClickedEnter;
+			_endTimer.removeEventListener(TimerEvent.TIMER, onTimerEnds);
+			_isGameEnded = true;
 		}
 	}
 }

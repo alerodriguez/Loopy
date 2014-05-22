@@ -1,19 +1,19 @@
 <Boards amount="2" score="10">
-	<board id="Nuevo_Ciclo_Valiente" name="Nuevo Ciclo Valiente">
+	<board id="Nuevo_Ciclo_Valiente" name="Nuevo Ciclo Valiente" editable="false">
 		<score rank="1" value="0"/>
 		<score rank="2" value="0"/>
 		<score rank="3" value="0"/>
 		<score rank="4" value="0"/>
 		<score rank="5" value="0"/>
 	</board>
-	<board id="Ciclo_Madre" name="Ciclo Madre">
+	<board id="Ciclo_Madre" name="Ciclo Madre" editable="false">
 		<score rank="1" value="0"/>
 		<score rank="2" value="0"/>
 		<score rank="3" value="0"/>
 		<score rank="4" value="0"/>
 		<score rank="5" value="0"/>
 	</board>
-	<board id="Primeros_Ciclos" name="Primeros Ciclos">
+	<board id="Primeros_Ciclos" name="Primeros Ciclos" editable="false">
 		<score rank="1" value="0"/>
 		<score rank="2" value="0"/>
 		<score rank="3" value="0"/>
@@ -27,7 +27,7 @@
 		<score rank="4" value="0"/>
 		<score rank="5" value="0"/>
 	</board>
-	<board id="Tiempo_Para_La_Escuela" name="Tiempo Para La Escuela">
+	<board id="Tiempo_Para_La_Escuela" name="Tiempo Para La Escuela" editable="false">
 		<score rank="1" value="0"/>
 		<score rank="2" value="0"/>
 		<score rank="3" value="0"/>

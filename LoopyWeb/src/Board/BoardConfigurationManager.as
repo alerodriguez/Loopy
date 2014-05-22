@@ -29,6 +29,11 @@ package Board
 			_levelKey = value;
 		}
 		
+		public function get LevelKey():String
+		{
+			return _levelKey;
+		}
+		
 		public function BoardConfigurationManager(key:SingletonKey)
 		{
 			if(!key)

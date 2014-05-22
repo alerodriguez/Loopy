@@ -16,6 +16,7 @@ package Board
 		private var _normalPrize:Number;
 		private var _normalPenalization:Number;
 		private var _score:Number;
+		private var _changeTextFunction:Function;
 		
 		//Variables para cada tabla de juego
 		private var _minCompletionPercentage:Number = 50;
@@ -34,8 +35,19 @@ package Board
 			_isPaused = value;
 		}
 		
-		public function Board()
-		{			
+		public function get Score():Number
+		{
+			return _score;
+		}
+		
+		public function get Percentage():Number
+		{
+			return _percentageCompleted;
+		}
+		
+		public function Board(changeTextFunction:Function)
+		{
+			_changeTextFunction = changeTextFunction;	
 			Initialize();
 		}
 		
@@ -56,6 +68,8 @@ package Board
 			_completionTable = table.completionTable;
 			
 			FillBoard();
+			addGoldenSquare();
+			_percentageCompleted = getPercentage();
 		}
 		
 		
@@ -74,7 +88,7 @@ package Board
 			var _EspacioCorrectoRestante:Number = _completionTableSize;
 			var _EspacioIncorrectoRestante:Number = 64 - _completionTableSize;
 			var _IsCorrect:Boolean;
-			var _probTemp:Number;
+			var _SquareType:Number;
 			for (var i:int = 0; i < 8; i++) 
 			{
 				for (var j:int = 0; j < 8; j++) 
@@ -84,43 +98,112 @@ package Board
 					{
 						_EspacioCorrectoRestante--;
 						if(_CantidadDentro <= 0)
-							_probTemp = 0;
+							_SquareType = 2;
 						else if(_CantidadDentro > _EspacioCorrectoRestante)
-							_probTemp = 100;
-						else if(Math.random() <= (_ProbCorrectaDentro/100))
-							_probTemp = _ProbCorrectaDentro;
-						if(addSquare(i, j, _probTemp, true))
+						{
+							_SquareType = 1;
 							_CantidadDentro--;
+						}
+						else if(Math.random() <= (_ProbCorrectaDentro/100))
+						{
+							_SquareType = 1;
+							_CantidadDentro--;
+						}
+						else
+						{
+							_SquareType = 2;
+						}
+						_squares.push(new Square(this, j, i, _SquareType, true));
 					}
 					else
 					{
 						_EspacioIncorrectoRestante--;
 						if(_CantidadFuera <= 0)
-							_probTemp = 0;
-						if(_CantidadFuera > _EspacioIncorrectoRestante)
-							_probTemp = 100;
-						if(Math.random() <= (_ProbCorrectaFuera/100))
-							_probTemp = _ProbCorrectaFuera
-						if(addSquare(i, j, _probTemp, false))
+							_SquareType = 2;
+						else if(_CantidadFuera > _EspacioIncorrectoRestante)
+						{
+							_SquareType = 1;
 							_CantidadFuera--;
+						}
+						else if(Math.random() <= (_ProbCorrectaFuera/100))
+						{
+							_SquareType = 1;
+							_CantidadFuera--;
+						}
+						else
+						{
+							_SquareType = 2;
+						}
+						_squares.push(new Square(this, j, i, _SquareType, false));
 					}
 				}
 			}
+			trace(_EspacioCorrectoRestante);
 		}
 		
-		public function addSquare(posX:Number, posY:Number, prob:Number, correct:Boolean):Boolean
+		
+		public function addGoldenSquare():void
 		{
-			if(Math.random() <= (prob/100))
+			var posX:Number = 0;
+			var posY:Number = 0;
+			var vacio:Boolean;
+			for (var i:int = 0; i < 8; i++) 
 			{
-				_squares.push(new Square(this, posY, posX, 1, correct));
-				return true;
+				for (var j:int = 0; j < 8; j++) 
+				{
+					vacio = _completionTable[i][j]; 
+					if(vacio)
+						continue
+					else
+					{
+						if(goldenCheck(i, j))
+						{
+							if((posX == 0 && posY == 0) || (Math.random() < 0.25))
+							{
+								posX = j;
+								posY = i;
+							}
+						}
+					}
+				}
 			}
-			else
-			{
-				_squares.push(new Square(this, posY, posX, 2, correct));
-				return false;
-			}
+			_squares.push(new Square(this, posX, posY, 0, false));
 		}
+		
+		public function goldenCheck(posY:Number, posX:Number):Boolean
+		{
+			var initialPosX:Number = posX - 1;
+			var initialPosY:Number = posY - 1;
+			var verticalDisplacement:Number = 3;
+			var horizontalDisplacement:Number = 3;
+			
+			if(posX == 0 || posX == 7)
+			{
+				horizontalDisplacement = 2;
+				if(posX == 0)
+					initialPosX = 0;
+			}
+			if(posY == 0 || posY == 7)
+			{
+				verticalDisplacement = 2;
+				if(posY == 0)
+					initialPosY = 0;
+			}
+			
+			var vacio:Boolean;
+			
+			for (var i:int = 0; i < verticalDisplacement; i++) 
+			{
+				for (var j:int = 0; j < horizontalDisplacement; j++) 
+				{
+					vacio = _completionTable[initialPosY + i][initialPosX + j];
+					if(vacio)
+						return false;
+				}
+			}
+			return true;
+		}
+		
 		
 		/**
 		 * Fin del codigo del mancorro
@@ -178,13 +261,15 @@ package Board
 			}
 			
 			_score += score;
-			trace("Score: " + _score);
 			
 			currentSquare.IsCorrect = isOtherAtCicle;
 			otherSquare.IsCorrect = isCurrAtCicle;
 			
 			currentSquare.MoveTo(otherXPos, otherYPos);
 			otherSquare.MoveTo(currXPos, currYPos);
+			
+			_percentageCompleted = getPercentage();
+			_changeTextFunction();
 		}
 		
 		private function getPenalization(square:Square):Number
@@ -221,6 +306,20 @@ package Board
 					break;
 			}
 			return score;
+		}
+		
+		private function getPercentage():Number
+		{
+			var percentage:Number = 0;
+			for each (var square:Square in _squares) 
+			{
+				if(square.IsCorrect && square.Type != SquareType.WRONG)
+				{
+					percentage++;
+				}
+			}
+			
+			return percentage * 100 / _completionTableSize;
 		}
 	}
 }

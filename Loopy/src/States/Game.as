@@ -8,8 +8,11 @@ package States
 	
 	public class Game extends Sprite
 	{
+		private var _splashScene:SplashState;
 		private var _mainMenu:MainMenuState;
-		private var _game:GameState;
+		private var _createScene:CreateState;
+		private var _gameScene:GameState;
+		private var _winScene:WinState;
 		private var _fSMManager:FSM;
 		
 		public function Game()
@@ -22,14 +25,25 @@ package States
 		{
 			_fSMManager = new FSM(this);
 			
+			_splashScene = new SplashState("SplashScene", _fSMManager, this);
 			_mainMenu = new MainMenuState("MainMenu", _fSMManager, this);
-			_game = new GameState("Game", _fSMManager, this);
+			_createScene = new CreateState("CreateScene", _fSMManager, this);
+			_gameScene = new GameState("GameScene", _fSMManager, this);
+			_winScene = new WinState("WinScene", _fSMManager, this);
 			
-			_fSMManager.addState(_mainMenu, true);
-			_fSMManager.addState(_game);
+			_fSMManager.addState(_splashScene, true);
+			_fSMManager.addState(_mainMenu);
+			_fSMManager.addState(_createScene);
+			_fSMManager.addState(_gameScene);
+			_fSMManager.addState(_winScene);
 			
-			_fSMManager.addTransition(_mainMenu, _game, _mainMenu.onEnterClicked);
-			_fSMManager.addTransition(_game, _mainMenu, _game.onIsGameEnded);
+			_fSMManager.addTransition(_splashScene, _mainMenu, _splashScene.play);
+			_fSMManager.addTransition(_splashScene, _createScene, _splashScene.create);
+			_fSMManager.addTransition(_createScene, _splashScene, _createScene.isSaved);
+			_fSMManager.addTransition(_mainMenu, _gameScene, _mainMenu.play);
+			_fSMManager.addTransition(_mainMenu, _splashScene, _mainMenu.back);
+			_fSMManager.addTransition(_gameScene, _winScene, _gameScene.onIsGameEnded);
+			_fSMManager.addTransition(_winScene, _mainMenu, _winScene.continueToMain);
 		}
 	}
 }

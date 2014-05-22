@@ -22,8 +22,8 @@ package MainMenu
 		private var _levels:Array;
 		private var _onButtonStartDown:Function;
 		
-		private var _backButton:Button;
-		private var _nextButton:Button;
+		private var _backBtn:Button;
+		private var _nextBtn:Button;
 		
 		private var _index:Number = 0;
 		
@@ -73,36 +73,36 @@ package MainMenu
 		
 		private function addButtons():void
 		{
-			_backButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(LEFT_TEXTURE), "");
-			_nextButton = new Button(AssetsManager.getAtlas(ATLAS).getTexture(RIGHT_TEXTURE), "");
+			_backBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(LEFT_TEXTURE), "");
+			_nextBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(RIGHT_TEXTURE), "");
 			
-			_backButton.addEventListener(Event.TRIGGERED, onBackButtonDown);
-			_nextButton.addEventListener(Event.TRIGGERED, onNextButtonDown);
+			_backBtn.addEventListener(Event.TRIGGERED, onBackButtonDown);
+			_nextBtn.addEventListener(Event.TRIGGERED, onNextButtonDown);
 			
-			_backButton.y = this.height / 2 - _backButton.height;
-			_nextButton.y = this.height / 2 - _nextButton.height;
-			_backButton.x = 25;
-			_nextButton.x = X_PADDING * 2 - _nextButton.width - 25;
+			_backBtn.y = this.height / 2 - _backBtn.height;
+			_nextBtn.y = this.height / 2 - _nextBtn.height;
+			_backBtn.x = 25;
+			_nextBtn.x = X_PADDING * 2 - _nextBtn.width - 25;
 			
-			_backButton.enabled = false;
+			_backBtn.enabled = false;
 			
-			this.addChild(_backButton);
-			this.addChild(_nextButton);
+			this.addChild(_backBtn);
+			this.addChild(_nextBtn);
 		}
 		
 		private function onBackButtonDown(event:Event):void
 		{
 			_index -= 1;
-			if(_index < 1) _backButton.enabled = false;
-			if(_levels.length > _index) _nextButton.enabled = true;
+			if(_index < 1) _backBtn.enabled = false;
+			if(_levels.length > _index) _nextBtn.enabled = true;
 			moveToIndex(_index);
 		}
 		
 		private function onNextButtonDown(event:Event):void
 		{
 			_index += 1;
-			if(_levels.length - 2 < _index) _nextButton.enabled = false;
-			if(_index > 0) _backButton.enabled = true;
+			if(_levels.length - 2 < _index) _nextBtn.enabled = false;
+			if(_index > 0) _backBtn.enabled = true;
 			moveToIndex(_index);
 		}
 		

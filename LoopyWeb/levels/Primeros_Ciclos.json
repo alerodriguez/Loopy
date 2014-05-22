@@ -1,4 +1,5 @@
 {
+	"name" : "Primeros Ciclos",
 	"initialScore" : 192,
 	"verticalPenalization" : -1,
 	"horizontalPenalization" : -3,
@@ -6,17 +7,17 @@
 	"normalPenalization" : -7,
 	"goldenPrize" : 25,
 	"goldenPenalization" : -25,
-	"minCompletionPercentage" : 50,
-	"maxCompletionPercentage" : 60,
+	"minCompletionPercentage" : 35,
+	"maxCompletionPercentage" : 50,
 	"completionTableSize" : 20,
 	"completionTable" : [
 		[0,0,0,0,0,0,0,0],
+		[0,0,0,1,1,0,0,0],
+		[0,0,1,1,1,1,0,0],
+		[0,0,0,1,1,0,0,0],
 		[0,1,1,1,1,1,1,0],
-		[0,1,0,0,0,0,1,0],
-		[0,1,0,0,0,0,1,0],
-		[0,1,0,0,0,0,1,0],
-		[0,1,0,0,0,0,1,0],
-		[0,1,1,1,1,1,1,0],
-		[0,0,0,0,0,0,0,0]
+		[0,0,0,1,1,0,0,0],
+		[0,0,1,0,0,1,0,0],
+		[0,0,1,0,0,1,0,0]
 	]
 }
