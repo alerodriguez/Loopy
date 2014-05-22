@@ -11,6 +11,7 @@ package States
 	import starling.text.TextField;
 	import starling.utils.HAlign;
 	import starling.utils.VAlign;
+	import utils.ResolutionController;
 	
 	public class MainMenuState extends State
 	{

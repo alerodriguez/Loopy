@@ -16,6 +16,7 @@ package Board
 		private var _normalPrize:Number;
 		private var _normalPenalization:Number;
 		private var _score:Number;
+		private var _changeTextFunction:Function;
 		
 		//Variables para cada tabla de juego
 		private var _minCompletionPercentage:Number = 50;
@@ -34,8 +35,19 @@ package Board
 			_isPaused = value;
 		}
 		
-		public function Board()
-		{			
+		public function get Score():Number
+		{
+			return _score;
+		}
+		
+		public function get Percentage():Number
+		{
+			return _percentageCompleted;
+		}
+		
+		public function Board(changeTextFunction:Function)
+		{
+			_changeTextFunction = changeTextFunction;	
 			Initialize();
 		}
 		
@@ -56,6 +68,7 @@ package Board
 			_completionTable = table.completionTable;
 			
 			FillBoard();
+			_percentageCompleted = getPercentage();
 		}
 		
 		
@@ -178,13 +191,15 @@ package Board
 			}
 			
 			_score += score;
-			trace("Score: " + _score);
 			
 			currentSquare.IsCorrect = isOtherAtCicle;
 			otherSquare.IsCorrect = isCurrAtCicle;
 			
 			currentSquare.MoveTo(otherXPos, otherYPos);
 			otherSquare.MoveTo(currXPos, currYPos);
+			
+			_percentageCompleted = getPercentage();
+			_changeTextFunction();
 		}
 		
 		private function getPenalization(square:Square):Number
@@ -221,6 +236,20 @@ package Board
 					break;
 			}
 			return score;
+		}
+		
+		private function getPercentage():Number
+		{
+			var percentage:Number = 0;
+			for each (var square:Square in _squares) 
+			{
+				if(square.IsCorrect && square.Type != SquareType.WRONG)
+				{
+					percentage++;
+				}
+			}
+			
+			return percentage * 100 / _completionTableSize;
 		}
 	}
 }

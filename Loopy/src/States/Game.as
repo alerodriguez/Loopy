@@ -29,7 +29,7 @@ package States
 			_fSMManager.addState(_game);
 			
 			_fSMManager.addTransition(_mainMenu, _game, _mainMenu.onEnterClicked);
-			_fSMManager.addTransition(_game, _mainMenu, _game.onEnterClicked);
+			_fSMManager.addTransition(_game, _mainMenu, _game.onIsGameEnded);
 		}
 	}
 }

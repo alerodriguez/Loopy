@@ -2,7 +2,7 @@
  * 
  * @author Alejandro Rodríguez
  */
-package
+package utils
 {
 	import flash.geom.Point;
 	import flash.system.Capabilities;

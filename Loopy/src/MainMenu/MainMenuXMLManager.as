@@ -16,6 +16,11 @@ package MainMenu
 			return _mainMenuConfig;
 		}
 		
+		public function set MainMenuConfig(value:XML):void
+		{
+			_mainMenuConfig = value;
+		}
+		
 		public function get BoardChilds():XMLList
 		{
 			return _mainMenuConfig.child(BOARD_CHILD);
