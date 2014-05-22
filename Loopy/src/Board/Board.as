@@ -68,6 +68,7 @@ package Board
 			_completionTable = table.completionTable;
 			
 			FillBoard();
+			addGoldenSquare();
 			_percentageCompleted = getPercentage();
 		}
 		
@@ -143,8 +144,66 @@ package Board
 		
 		public function addGoldenSquare():void
 		{
-			
+			var posX:Number = 0;
+			var posY:Number = 0;
+			var vacio:Boolean;
+			for (var i:int = 0; i < 8; i++) 
+			{
+				for (var j:int = 0; j < 8; j++) 
+				{
+					vacio = _completionTable[i][j]; 
+					if(vacio)
+						continue
+					else
+					{
+						if(goldenCheck(i, j))
+						{
+							if((posX == 0 && posY == 0) || (Math.random() < 0.25))
+							{
+								posX = j;
+								posY = i;
+							}
+						}
+					}
+				}
+			}
+			_squares.push(new Square(this, posX, posY, 0, false));
 		}
+		
+		public function goldenCheck(posY:Number, posX:Number):Boolean
+		{
+			var initialPosX:Number = posX - 1;
+			var initialPosY:Number = posY - 1;
+			var verticalDisplacement:Number = 3;
+			var horizontalDisplacement:Number = 3;
+			
+			if(posX == 0 || posX == 7)
+			{
+				horizontalDisplacement = 2;
+				if(posX == 0)
+					initialPosX = 0;
+			}
+			if(posY == 0 || posY == 7)
+			{
+				verticalDisplacement = 2;
+				if(posY == 0)
+					initialPosY = 0;
+			}
+			
+			var vacio:Boolean;
+			
+			for (var i:int = 0; i < verticalDisplacement; i++) 
+			{
+				for (var j:int = 0; j < horizontalDisplacement; j++) 
+				{
+					vacio = _completionTable[initialPosY + i][initialPosX + j];
+					if(vacio)
+						return false;
+				}
+			}
+			return true;
+		}
+		
 		
 		/**
 		 * Fin del codigo del mancorro
