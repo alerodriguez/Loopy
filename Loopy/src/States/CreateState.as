@@ -31,7 +31,7 @@ package States
 		private const FONT_NAME:String = "PixelSplitter";
 		private const TITTLE_TEXT:String = "Nuevo Tablero";
 		private const ATLAS:String = "ButtonAtlas";
-		private const LEFT_TEXTURE:String = "008";
+		private const APPLY_TEXTURE:String = "Apply";
 		
 		private var _saved:Boolean = false;
 		
@@ -86,7 +86,7 @@ package States
 			
 			for each (var text:String in _textFieldsText) 
 			{
-				var tempText:TextField = new TextField(1000, 30, text);
+				var tempText:TextField = new TextField(1000, 30, text,"Verdana", 12, 0xffffff);
 				tempText.hAlign = HAlign.LEFT;
 				_textFields.push(tempText);
 			}
@@ -116,7 +116,7 @@ package States
 		
 		public override function onEnter():void
 		{
-			_saveBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(LEFT_TEXTURE), "");
+			_saveBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(APPLY_TEXTURE), "");
 			_saveBtn.addEventListener(Event.TRIGGERED, onSaveButtonDown);
 			
 			_board = new EditableBoard();
@@ -165,8 +165,8 @@ package States
 			_gPenalizationTxt.textEditorProperties.maxChars = 3;
 			
 			ResolutionController.dockObject(_board, ResolutionController.CENTER, 0, ResolutionController.CENTER, 0);
-			ResolutionController.dockObject(_saveBtn, ResolutionController.CENTER, -_board.width/3, ResolutionController.BOTTOM, -10);
-			ResolutionController.dockObject(_titleTxt, ResolutionController.CENTER, 0, ResolutionController.TOP, 10);
+			ResolutionController.dockObject(_saveBtn, ResolutionController.RIGHT, -50, ResolutionController.BOTTOM, -50);
+			ResolutionController.dockObject(_titleTxt, ResolutionController.CENTER, 0, ResolutionController.TOP, 30);
 			ResolutionController.dockObject(_startScoreTxt, ResolutionController.LEFT, 150, ResolutionController.TOP, 55);
 			ResolutionController.dockObject(_minPercentageTxt, ResolutionController.LEFT, 150, ResolutionController.TOP, 85);
 			ResolutionController.dockObject(_maxPercentageTxt, ResolutionController.LEFT, 150, ResolutionController.TOP, 115);
@@ -221,7 +221,7 @@ package States
 			
 			textEditor.autoCapitalize = AutoCapitalize.NONE;
 			textEditor.autoCorrect = false;
-			textEditor.color = 0x000000;
+			textEditor.color = 0xdfdfdf;
 			textEditor.displayAsPassword = false;
 			textEditor.fontFamily = "Helvetica";
 			textEditor.fontSize = 24;
@@ -238,7 +238,7 @@ package States
 			
 			textEditor.autoCapitalize = AutoCapitalize.NONE;
 			textEditor.autoCorrect = false;
-			textEditor.color = 0x000000;
+			textEditor.color = 0xffffff;
 			textEditor.displayAsPassword = false;
 			textEditor.fontFamily = "Helvetica";
 			textEditor.fontSize = 14;
@@ -310,15 +310,15 @@ package States
 			var pattern:RegExp = /^[0-9]+$/;
 			var isValid:Boolean = true;
 			
-			_startScoreTxt.textEditorProperties.color = 0x000000;
-			_minPercentageTxt.textEditorProperties.color = 0x000000;
-			_maxPercentageTxt.textEditorProperties.color = 0x000000;
-			_hPenalizationTxt.textEditorProperties.color = 0x000000;
-			_vPenalizationTxt.textEditorProperties.color = 0x000000;
-			_nBonificationTxt.textEditorProperties.color = 0x000000;
-			_nPenalizationTxt.textEditorProperties.color = 0x000000;
-			_gBonificationTxt.textEditorProperties.color = 0x000000;
-			_gPenalizationTxt.textEditorProperties.color = 0x000000;
+			_startScoreTxt.textEditorProperties.color = 0xffffff;
+			_minPercentageTxt.textEditorProperties.color = 0xffffff;
+			_maxPercentageTxt.textEditorProperties.color = 0xffffff;
+			_hPenalizationTxt.textEditorProperties.color = 0xffffff;
+			_vPenalizationTxt.textEditorProperties.color = 0xffffff;
+			_nBonificationTxt.textEditorProperties.color = 0xffffff;
+			_nPenalizationTxt.textEditorProperties.color = 0xffffff;
+			_gBonificationTxt.textEditorProperties.color = 0xffffff;
+			_gPenalizationTxt.textEditorProperties.color = 0xffffff;
 			
 			var isadaf:Boolean = pattern.test(_startScoreTxt.text);
 			if(!pattern.test(_startScoreTxt.text))

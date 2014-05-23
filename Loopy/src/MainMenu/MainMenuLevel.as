@@ -13,15 +13,17 @@ package MainMenu
 	
 	public class MainMenuLevel extends DisplayObjectContainer
 	{
+		private const TITLE_FONT_NAME:String = "TektonPro_Bold";
+		private const SCORE_FONT_NAME:String = "Thonburi";
 		private const ATLAS:String = "ButtonAtlas";
-		private const EDIT_TEXTURE:String = "000";
-		private const PLAY_TEXTURE:String = "005";
+		private const EDIT_TEXTURE:String = "Maintenance";
+		private const PLAY_TEXTURE:String = "Go";
 		
-		private const SCORES_OFFSET:Number = 40;
-		private const SCORES_PADDING:Number = 50;
+		private const SCORES_OFFSET:Number = 30;
+		private const SCORES_PADDING:Number = 150;
 		
 		private const BUTTON_X_OFFSET:Number = 50;
-		private const BUTTON_Y_OFFSET:Number = 50;
+		private const BUTTON_Y_OFFSET:Number = 100;
 		
 		private var _id:String;
 		private var _name:String;
@@ -51,7 +53,9 @@ package MainMenu
 		
 		private function initialize():void
 		{
-			_nameTextField = new TextField(500, 100, _name, "font", 30, 0x000000);
+			AssetsManager.registerBitmapFont(TITLE_FONT_NAME);
+			AssetsManager.registerBitmapFont(SCORE_FONT_NAME);
+			_nameTextField = new TextField(500, 100, _name, TITLE_FONT_NAME, 50, 0xdfdfdf);
 			_nameTextField.batchable = true;
 			_nameTextField.vAlign = VAlign.TOP;
 			_nameTextField.hAlign = HAlign.CENTER;
@@ -62,8 +66,8 @@ package MainMenu
 			for (var index:int = 0; index < _scores.length; index++)
 			{
 				var scoreText:String = (index + 1) + " Lugar: "; 
-				_scoresTextFields.push(new TextField(200, 40, scoreText, "font", 30, 0x000000));
-				_scoresValuesTextFields.push(new TextField(300, 40, _scores[index].toString(), "font", 30, 0x000000));
+				_scoresTextFields.push(new TextField(200, 40, scoreText, SCORE_FONT_NAME, 20, 0xffffff));
+				_scoresValuesTextFields.push(new TextField(300, 40, _scores[index].toString(), SCORE_FONT_NAME, 20, 0xffffff));
 				
 				_scoresTextFields[index].batchable = true;
 				_scoresTextFields[index].vAlign = VAlign.TOP;

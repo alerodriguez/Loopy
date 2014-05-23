@@ -1,19 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:be9c44e1a425c667bf3234fd0e120774:e100f076681ce420a0268545dec56ba7:d597b84d3d9bb3c2e3007f39bdd8b491$ -->
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:3910ba29b86aa5408895f7dc5884c878$ -->
 <TextureAtlas imagePath="ButtonAtlas.png">
-    <SubTexture name="000" x="2" y="2" width="64" height="64"/>
-    <SubTexture name="001" x="68" y="2" width="64" height="64"/>
-    <SubTexture name="002" x="134" y="2" width="64" height="64"/>
-    <SubTexture name="003" x="200" y="2" width="64" height="64"/>
-    <SubTexture name="004" x="266" y="2" width="64" height="64"/>
-    <SubTexture name="005" x="332" y="2" width="64" height="64"/>
-    <SubTexture name="006" x="398" y="2" width="64" height="64"/>
-    <SubTexture name="007" x="2" y="68" width="64" height="64"/>
-    <SubTexture name="008" x="68" y="68" width="64" height="64"/>
-    <SubTexture name="009" x="134" y="68" width="64" height="64"/>
-    <SubTexture name="010" x="200" y="68" width="64" height="64"/>
-    <SubTexture name="011" x="266" y="68" width="64" height="64"/>
-    <SubTexture name="012" x="332" y="68" width="64" height="64"/>
-    <SubTexture name="013" x="398" y="68" width="64" height="64"/>
+    <SubTexture name="AC" x="1" y="1" width="50" height="50"/>
+    <SubTexture name="Abort" x="52" y="1" width="50" height="50"/>
+    <SubTexture name="Add" x="103" y="1" width="50" height="50"/>
+    <SubTexture name="Alien" x="154" y="1" width="50" height="50"/>
+    <SubTexture name="Align-center" x="205" y="1" width="50" height="50"/>
+    <SubTexture name="Align-justify" x="256" y="1" width="50" height="50"/>
+    <SubTexture name="Align-left" x="307" y="1" width="50" height="50"/>
+    <SubTexture name="Align-right" x="358" y="1" width="50" height="50"/>
+    <SubTexture name="Android" x="409" y="1" width="50" height="50"/>
+    <SubTexture name="Apple" x="460" y="1" width="50" height="50"/>
+    <SubTexture name="Apply" x="1" y="52" width="50" height="50"/>
+    <SubTexture name="Back-button" x="52" y="52" width="50" height="50"/>
+    <SubTexture name="Backward" x="103" y="52" width="50" height="50"/>
+    <SubTexture name="Bird" x="154" y="52" width="50" height="50"/>
+    <SubTexture name="Bluetooth" x="205" y="52" width="50" height="50"/>
+    <SubTexture name="Boxplot" x="256" y="52" width="50" height="50"/>
+    <SubTexture name="Briefcase" x="307" y="52" width="50" height="50"/>
+    <SubTexture name="Buddy" x="358" y="52" width="50" height="50"/>
+    <SubTexture name="Camera" x="409" y="52" width="50" height="50"/>
+    <SubTexture name="Cancel" x="460" y="52" width="50" height="50"/>
+    <SubTexture name="Cat" x="1" y="103" width="50" height="50"/>
+    <SubTexture name="Check boxes" x="52" y="103" width="50" height="50"/>
+    <SubTexture name="Clear" x="103" y="103" width="50" height="50"/>
+    <SubTexture name="Clipboard-file" x="154" y="103" width="50" height="50"/>
+    <SubTexture name="Clipboard" x="205" y="103" width="50" height="50"/>
+    <SubTexture name="Close" x="256" y="103" width="50" height="50"/>
+    <SubTexture name="Cloud-add" x="307" y="103" width="50" height="50"/>
+    <SubTexture name="Cloud-delete" x="358" y="103" width="50" height="50"/>
+    <SubTexture name="Cloud-download" x="409" y="103" width="50" height="50"/>
+    <SubTexture name="Cloud-refresh" x="460" y="103" width="50" height="50"/>
+    <SubTexture name="Cloud-sync" x="1" y="154" width="50" height="50"/>
+    <SubTexture name="Cloud-upload" x="52" y="154" width="50" height="50"/>
+    <SubTexture name="Cone" x="103" y="154" width="50" height="50"/>
+    <SubTexture name="Configuration" x="154" y="154" width="50" height="50"/>
+    <SubTexture name="Copyright" x="205" y="154" width="50" height="50"/>
+    <SubTexture name="Cow" x="256" y="154" width="50" height="50"/>
+    <SubTexture name="Create" x="307" y="154" width="50" height="50"/>
+    <SubTexture name="Crosshair" x="358" y="154" width="50" height="50"/>
+    <SubTexture name="Currency" x="409" y="154" width="50" height="50"/>
+    <SubTexture name="Cut" x="460" y="154" width="50" height="50"/>
+    <SubTexture name="Delete" x="1" y="205" width="50" height="50"/>
+    <SubTexture name="Diagram" x="52" y="205" width="50" height="50"/>
+    <SubTexture name="Dice" x="103" y="205" width="50" height="50"/>
+    <SubTexture name="Disk-download" x="154" y="205" width="50" height="50"/>
+    <SubTexture name="Disk-upload" x="205" y="205" width="50" height="50"/>
+    <SubTexture name="Dog" x="256" y="205" width="50" height="50"/>
+    <SubTexture name="Dollar" x="307" y="205" width="50" height="50"/>
+    <SubTexture name="Down" x="358" y="205" width="50" height="50"/>
+    <SubTexture name="Dustbin" x="409" y="205" width="50" height="50"/>
+    <SubTexture name="Equipment" x="460" y="205" width="50" height="50"/>
+    <SubTexture name="Erase" x="1" y="256" width="50" height="50"/>
+    <SubTexture name="Error" x="52" y="256" width="50" height="50"/>
+    <SubTexture name="Euro" x="103" y="256" width="50" height="50"/>
+    <SubTexture name="Exit-button" x="154" y="256" width="50" height="50"/>
+    <SubTexture name="Exit" x="205" y="256" width="50" height="50"/>
+    <SubTexture name="Find" x="256" y="256" width="50" height="50"/>
+    <SubTexture name="First" x="307" y="256" width="50" height="50"/>
+    <SubTexture name="Flow-block" x="358" y="256" width="50" height="50"/>
+    <SubTexture name="Folder" x="409" y="256" width="50" height="50"/>
+    <SubTexture name="Forward-button" x="460" y="256" width="50" height="50"/>
+    <SubTexture name="Forward" x="1" y="307" width="50" height="50"/>
+    <SubTexture name="Frames" x="52" y="307" width="50" height="50"/>
+    <SubTexture name="Full recycle bin" x="103" y="307" width="50" height="50"/>
+    <SubTexture name="Gear" x="154" y="307" width="50" height="50"/>
+    <SubTexture name="Go" x="205" y="307" width="50" height="50"/>
+    <SubTexture name="Google-plus" x="256" y="307" width="50" height="50"/>
+    <SubTexture name="Help" x="307" y="307" width="50" height="50"/>
+    <SubTexture name="Industry" x="358" y="307" width="50" height="50"/>
+    <SubTexture name="Infinity" x="409" y="307" width="50" height="50"/>
+    <SubTexture name="Info" x="460" y="307" width="50" height="50"/>
+    <SubTexture name="Last" x="1" y="358" width="50" height="50"/>
+    <SubTexture name="Layers" x="52" y="358" width="50" height="50"/>
+    <SubTexture name="Layout" x="103" y="358" width="50" height="50"/>
+    <SubTexture name="Left" x="154" y="358" width="50" height="50"/>
+    <SubTexture name="Linux" x="205" y="358" width="50" height="50"/>
+    <SubTexture name="Login" x="256" y="358" width="50" height="50"/>
+    <SubTexture name="Maintenance" x="307" y="358" width="50" height="50"/>
+    <SubTexture name="Music" x="358" y="358" width="50" height="50"/>
+    <SubTexture name="New" x="409" y="358" width="50" height="50"/>
+    <SubTexture name="No entry" x="460" y="358" width="50" height="50"/>
+    <SubTexture name="No" x="1" y="409" width="50" height="50"/>
+    <SubTexture name="OK" x="52" y="409" width="50" height="50"/>
+    <SubTexture name="Open file" x="103" y="409" width="50" height="50"/>
+    <SubTexture name="Options" x="154" y="409" width="50" height="50"/>
+    <SubTexture name="Out" x="205" y="409" width="50" height="50"/>
+    <SubTexture name="Paperclip" x="256" y="409" width="50" height="50"/>
+    <SubTexture name="Password" x="307" y="409" width="50" height="50"/>
+    <SubTexture name="Pause button" x="358" y="409" width="50" height="50"/>
+    <SubTexture name="Peace" x="409" y="409" width="50" height="50"/>
+    <SubTexture name="Phone-number" x="460" y="409" width="50" height="50"/>
+    <SubTexture name="Picture" x="1" y="460" width="50" height="50"/>
+    <SubTexture name="Play button" x="52" y="460" width="50" height="50"/>
+    <SubTexture name="Pound" x="103" y="460" width="50" height="50"/>
+    <SubTexture name="Problem" x="154" y="460" width="50" height="50"/>
+    <SubTexture name="Question" x="205" y="460" width="50" height="50"/>
+    <SubTexture name="Radioactive" x="256" y="460" width="50" height="50"/>
+    <SubTexture name="Recycle bin" x="307" y="460" width="50" height="50"/>
+    <SubTexture name="Redo" x="358" y="460" width="50" height="50"/>
+    <SubTexture name="Refresh" x="409" y="460" width="50" height="50"/>
+    <SubTexture name="Remove" x="460" y="460" width="50" height="50"/>
+    <SubTexture name="Repeat" x="1" y="511" width="50" height="50"/>
+    <SubTexture name="Resize" x="52" y="511" width="50" height="50"/>
+    <SubTexture name="Ribbon" x="103" y="511" width="50" height="50"/>
+    <SubTexture name="Right" x="154" y="511" width="50" height="50"/>
+    <SubTexture name="Rotate" x="205" y="511" width="50" height="50"/>
+    <SubTexture name="Save as" x="256" y="511" width="50" height="50"/>
+    <SubTexture name="Save pictures" x="307" y="511" width="50" height="50"/>
+    <SubTexture name="Save" x="358" y="511" width="50" height="50"/>
+    <SubTexture name="Send photo" x="409" y="511" width="50" height="50"/>
+    <SubTexture name="Send-message" x="460" y="511" width="50" height="50"/>
+    <SubTexture name="Shuffle" x="1" y="562" width="50" height="50"/>
+    <SubTexture name="Snowflake" x="52" y="562" width="50" height="50"/>
+    <SubTexture name="Stop button" x="103" y="562" width="50" height="50"/>
+    <SubTexture name="Stop" x="154" y="562" width="50" height="50"/>
+    <SubTexture name="Tools" x="205" y="562" width="50" height="50"/>
+    <SubTexture name="Trash" x="256" y="562" width="50" height="50"/>
+    <SubTexture name="Turn off" x="307" y="562" width="50" height="50"/>
+    <SubTexture name="Turtle" x="358" y="562" width="50" height="50"/>
+    <SubTexture name="Undo" x="409" y="562" width="50" height="50"/>
+    <SubTexture name="Up" x="460" y="562" width="50" height="50"/>
+    <SubTexture name="Video" x="1" y="613" width="50" height="50"/>
+    <SubTexture name="View" x="52" y="613" width="50" height="50"/>
+    <SubTexture name="Warning" x="103" y="613" width="50" height="50"/>
+    <SubTexture name="Weather-overcast" x="154" y="613" width="50" height="50"/>
+    <SubTexture name="Weather-rain" x="205" y="613" width="50" height="50"/>
+    <SubTexture name="Weather-snow" x="256" y="613" width="50" height="50"/>
+    <SubTexture name="Weather-sun" x="307" y="613" width="50" height="50"/>
+    <SubTexture name="Weather-thunder" x="358" y="613" width="50" height="50"/>
+    <SubTexture name="Wi-fi" x="409" y="613" width="50" height="50"/>
+    <SubTexture name="Windows-phone" x="460" y="613" width="50" height="50"/>
+    <SubTexture name="Windows" x="1" y="664" width="50" height="50"/>
+    <SubTexture name="Yen" x="52" y="664" width="50" height="50"/>
+    <SubTexture name="Zoom-in" x="103" y="664" width="50" height="50"/>
+    <SubTexture name="Zoom-out" x="154" y="664" width="50" height="50"/>
+    <SubTexture name="Zoom" x="205" y="664" width="50" height="50"/>
 </TextureAtlas>

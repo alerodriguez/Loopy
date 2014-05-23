@@ -13,11 +13,11 @@ package MainMenu
 		private const LEVEL_WIDTH:Number = 500;
 		private const LEVEL_PADDING:Number = 100;
 		private const X_PADDING:Number = 350;
-		private const Y_PADDING:Number = 200;
+		private const Y_PADDING:Number = 275;
 		
 		private const ATLAS:String = "ButtonAtlas";
-		private const LEFT_TEXTURE:String = "008";
-		private const RIGHT_TEXTURE:String = "009";
+		private const LEFT_TEXTURE:String = "Left";
+		private const RIGHT_TEXTURE:String = "Right";
 		
 		private var _levels:Array;
 		private var _onButtonStartDown:Function;
