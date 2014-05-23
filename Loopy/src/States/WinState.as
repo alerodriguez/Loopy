@@ -38,7 +38,7 @@ package States
 		public override function onEnter():void
 		{
 			_continueBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(LEFT_TEXTURE), "");
-			_continueBtn.addEventListener(Event.TRIGGERED, onPlayButtonDown);
+			_continueBtn.addEventListener(Event.TRIGGERED, onContinueButtonDown);
 			
 			_scene.addChild(_titleTextField);
 			_scene.addChild(_continueBtn);
@@ -56,10 +56,10 @@ package States
 			_continue = false;
 		}
 		
-		private function onPlayButtonDown(event:Event):void
+		private function onContinueButtonDown(event:Event):void
 		{
 			_continue = true;
-			_continueBtn.removeEventListener(Event.TRIGGERED, onPlayButtonDown);
+			_continueBtn.removeEventListener(Event.TRIGGERED, onContinueButtonDown);
 		}
 		
 		public function continueToMain():Boolean
