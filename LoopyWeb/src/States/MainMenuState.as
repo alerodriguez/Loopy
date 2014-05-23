@@ -16,7 +16,7 @@ package States
 	public class MainMenuState extends State
 	{		
 		private const ATLAS:String = "ButtonAtlas";
-		private const LEFT_TEXTURE:String = "008";
+		private const BACK_TEXTURE:String = "Backward";
 		
 		private var _play:Boolean = false;
 		private var _back:Boolean = false;
@@ -32,10 +32,10 @@ package States
 		public override function onEnter():void
 		{
 			_levelSlider = new MainMenuLevelSlider(onButtonStartDown);
-			_backBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(LEFT_TEXTURE), "");
+			_backBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(BACK_TEXTURE), "");
 			_backBtn.addEventListener(Event.TRIGGERED, onBackButtonDown);
 			
-			ResolutionController.dockObject(_backBtn, ResolutionController.CENTER, 0, ResolutionController.CENTER, 200);
+			ResolutionController.dockObject(_backBtn, ResolutionController.RIGHT, -50, ResolutionController.BOTTOM, -50);
 			
 			_scene.addChild(_levelSlider);
 			_scene.addChild(_backBtn);

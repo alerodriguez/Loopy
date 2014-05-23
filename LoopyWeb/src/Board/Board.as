@@ -24,6 +24,7 @@ package Board
 		private var _CantidadActual:Number = 0;
 		private var _completionTableSize:Number = 16;
 		private var _completionTable:Array;
+		private var _goldenSquaresAmount:Number;
 		
 		public function get IsPaused():Boolean
 		{
@@ -47,7 +48,7 @@ package Board
 		
 		public function Board(changeTextFunction:Function)
 		{
-			_changeTextFunction = changeTextFunction;	
+			_changeTextFunction = changeTextFunction;
 			Initialize();
 		}
 		
@@ -66,6 +67,7 @@ package Board
 			_maxCompletionPercentage = table.maxCompletionPercentage;
 			_completionTableSize = table.completionTableSize;
 			_completionTable = table.completionTable;
+			_goldenSquaresAmount = table.goldenSquares;
 			
 			FillBoard();
 			addGoldenSquare();
@@ -147,10 +149,14 @@ package Board
 			var posX:Number = 0;
 			var posY:Number = 0;
 			var vacio:Boolean;
+			var amount:Number = _goldenSquaresAmount;
+			var correctPositions:Array = new Array();
 			for (var i:int = 0; i < 8; i++) 
 			{
 				for (var j:int = 0; j < 8; j++) 
 				{
+					if(amount <= 0)
+						return;
 					vacio = _completionTable[i][j]; 
 					if(vacio)
 						continue
@@ -158,16 +164,21 @@ package Board
 					{
 						if(goldenCheck(i, j))
 						{
-							if((posX == 0 && posY == 0) || (Math.random() < 0.25))
-							{
-								posX = j;
-								posY = i;
-							}
+							correctPositions.push([i, j]);
 						}
 					}
 				}
 			}
-			_squares.push(new Square(this, posX, posY, 0, false));
+			
+			for (var count:int = 0; count < amount; count++) 
+			{
+				if(correctPositions.length > 0)
+				{
+					var position:Number = Math.floor(Math.random()*correctPositions.length);
+					_squares.push(new Square(this, correctPositions[position][1], correctPositions[position][0], 0, false));
+					correctPositions.splice(position, 1);
+				}
+			}
 		}
 		
 		public function goldenCheck(posY:Number, posX:Number):Boolean

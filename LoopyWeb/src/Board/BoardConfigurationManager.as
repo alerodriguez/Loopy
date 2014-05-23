@@ -61,6 +61,11 @@ package Board
 			}
 			return _levels[_levelKey];
 		}
+		
+		public function saveLevel(levelKey:String, level:Object):void
+		{
+			_levels[levelKey] = level;
+		}
 	}
 }
 

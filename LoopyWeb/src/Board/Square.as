@@ -13,7 +13,6 @@ package Board
 		private const ATLAS:String = "SquareAtlas";
 		private const GOLDEN_TEXTURE:String = "000";
 		private const RIGHT_TEXTURE:String = "001";
-		private const WRONG_TEXTURE:String = "002";
 		private const MASK_TEXTURE:String = "006";
 		private const PADDING_OFFSET:Number = 2;
 		
@@ -24,6 +23,7 @@ package Board
 		private var _squareImage:Image;
 		private var _squareMask:Image;
 		private var _isCorrect:Boolean;
+		private var WRONG_TEXTURE:Array = ["002", "005"];
 		
 		
 		public function get XPosition():Number
@@ -53,7 +53,7 @@ package Board
 		
 		public function set Type(value:int):void
 		{
-			_yPosition = _type;
+			_type = value;
 		}
 		
 		public function get IsCorrect():Boolean
@@ -92,7 +92,7 @@ package Board
 					break;
 					
 				default:
-					_squareImage = new Image(AssetsManager.getAtlas(ATLAS).getTexture(WRONG_TEXTURE));
+					_squareImage = new Image(AssetsManager.getAtlas(ATLAS).getTexture(WRONG_TEXTURE[Math.floor(Math.random()*WRONG_TEXTURE.length)]));
 					break;
 			}
 			

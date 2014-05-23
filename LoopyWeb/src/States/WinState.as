@@ -19,7 +19,7 @@ package States
 		private const FONT_NAME:String = "PixelSplitter";
 		private const TITTLE_TEXT:String = "You Win!!!";
 		private const ATLAS:String = "ButtonAtlas";
-		private const LEFT_TEXTURE:String = "008";
+		private const BACK_TEXTURE:String = "Apply";
 		
 		private var _continue:Boolean = false;
 		
@@ -29,7 +29,7 @@ package States
 		public function WinState(name:String, parentFSM:FSM, scene:Sprite)
 		{
 			super(name, parentFSM, scene);
-			_titleTextField = new TextField(500, 200, "", FONT_NAME, 30, 0x000000);
+			_titleTextField = new TextField(500, 200, "", FONT_NAME, 30, 0xdfdfdf);
 			_titleTextField.batchable = true;
 			_titleTextField.vAlign = VAlign.TOP;
 			_titleTextField.hAlign = HAlign.CENTER;
@@ -37,15 +37,15 @@ package States
 		
 		public override function onEnter():void
 		{
-			_continueBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(LEFT_TEXTURE), "");
-			_continueBtn.addEventListener(Event.TRIGGERED, onPlayButtonDown);
+			_continueBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(BACK_TEXTURE), "");
+			_continueBtn.addEventListener(Event.TRIGGERED, onContinueButtonDown);
 			
 			_scene.addChild(_titleTextField);
 			_scene.addChild(_continueBtn);
 			_titleTextField.text = TITTLE_TEXT;
 			
 			ResolutionController.dockObject(_continueBtn, ResolutionController.CENTER, 0, ResolutionController.CENTER, 200);
-			ResolutionController.dockObject(_titleTextField, ResolutionController.CENTER, 0, ResolutionController.CENTER, -200);
+			ResolutionController.dockObject(_titleTextField, ResolutionController.CENTER, 0, ResolutionController.CENTER, -100);
 		}
 		
 		public override function onExit():void
@@ -56,10 +56,10 @@ package States
 			_continue = false;
 		}
 		
-		private function onPlayButtonDown(event:Event):void
+		private function onContinueButtonDown(event:Event):void
 		{
 			_continue = true;
-			_continueBtn.removeEventListener(Event.TRIGGERED, onPlayButtonDown);
+			_continueBtn.removeEventListener(Event.TRIGGERED, onContinueButtonDown);
 		}
 		
 		public function continueToMain():Boolean

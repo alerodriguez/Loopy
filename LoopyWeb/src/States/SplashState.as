@@ -16,10 +16,11 @@ package States
 	
 	public class SplashState extends State
 	{
-		private const FONT_NAME:String = "PixelSplitter";
+		private const FONT_NAME:String = "SegoeUI";
 		private const TITTLE_TEXT:String = "LOOPY";
 		private const ATLAS:String = "ButtonAtlas";
-		private const LEFT_TEXTURE:String = "008";
+		private const CREATE_TEXTURE:String = "Video";
+		private const PLAY_TEXTURE:String = "Go";
 		
 		private var _create:Boolean = false;
 		private var _play:Boolean = false;
@@ -31,7 +32,8 @@ package States
 		public function SplashState(name:String, parentFSM:FSM, scene:Sprite)
 		{
 			super(name, parentFSM, scene);
-			_titleTextField = new TextField(500, 200, "", FONT_NAME, 30, 0x000000);
+			AssetsManager.registerBitmapFont(FONT_NAME);
+			_titleTextField = new TextField(500, 200, "", FONT_NAME, 64, 0xdfdfdf);
 			_titleTextField.batchable = true;
 			_titleTextField.vAlign = VAlign.TOP;
 			_titleTextField.hAlign = HAlign.CENTER;
@@ -39,8 +41,8 @@ package States
 		
 		public override function onEnter():void
 		{
-			_playBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(LEFT_TEXTURE), "");
-			_createBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(LEFT_TEXTURE), "");
+			_playBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(PLAY_TEXTURE), "");
+			_createBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(CREATE_TEXTURE), "");
 			_playBtn.addEventListener(Event.TRIGGERED, onPlayButtonDown);
 			_createBtn.addEventListener(Event.TRIGGERED, onCreateButtonDown);
 			

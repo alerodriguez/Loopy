@@ -25,10 +25,13 @@ package States
 	public class GameState extends State
 	{
 		private const ATLAS:String = "ButtonAtlas";
-		private const LEFT_TEXTURE:String = "008";
+		private const BACK_TEXTURE:String = "Backward";
 		private const END_TIMER_TIME:Number = 1000;
+		private const TITLE_FONT_NAME:String = "TektonPro_Small";
+		private const SCORE_FONT_NAME:String = "Thonburi";
 		
 		private var _isGameEnded:Boolean = false;
+		private var _isGameBack:Boolean = false;
 		private var _isTiming:Boolean = false;
 		private var _board:Board;
 		private var _scoreTxt:NumberTextField;
@@ -50,13 +53,16 @@ package States
 			
 			_board = new Board(onBoardChangeScore);
 			
-			_titleTxt = new TextField(700, 30, BoardConfigurationManager.getInstance().getLevel().name);
-			_scoreTxt = new NumberTextField(1000, 30, "Puntuación: ");
-			_percentageTxt = new NumberTextField(1000, 30, "Porcentaje: ", "Verdana", 12, 0, "%");
+			AssetsManager.registerBitmapFont(TITLE_FONT_NAME);
+			AssetsManager.registerBitmapFont(SCORE_FONT_NAME);
+			
+			_titleTxt = new TextField(700, 60, BoardConfigurationManager.getInstance().getLevel().name, TITLE_FONT_NAME, 36, 0xdfdfdf);
+			_scoreTxt = new NumberTextField(1000, 30, "Puntuacion: ", SCORE_FONT_NAME, 20, 0xffffff);
+			_percentageTxt = new NumberTextField(1000, 30, "Porcentaje: ", SCORE_FONT_NAME, 20, 0xffffff, "%");
 			_scoreTxt.hAlign = HAlign.LEFT;
 			_percentageTxt.hAlign = HAlign.LEFT;
 			
-			_backBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(LEFT_TEXTURE), "");
+			_backBtn = new Button(AssetsManager.getAtlas(ATLAS).getTexture(BACK_TEXTURE), "");
 			_backBtn.addEventListener(Event.TRIGGERED, onBackButtonDown);
 			
 			_scene.addChild(_board);
@@ -66,7 +72,7 @@ package States
 			_scene.addChild(_percentageTxt);
 			
 			ResolutionController.dockObject(_board, ResolutionController.CENTER, 0, ResolutionController.CENTER, 0);
-			ResolutionController.dockObject(_backBtn, ResolutionController.CENTER, -_board.width/3, ResolutionController.BOTTOM, -10);
+			ResolutionController.dockObject(_backBtn, ResolutionController.RIGHT, -50, ResolutionController.BOTTOM, -50);
 			ResolutionController.dockObject(_titleTxt, ResolutionController.CENTER, 0, ResolutionController.TOP, 10);
 			ResolutionController.dockObject(_scoreTxt, ResolutionController.LEFT, 50, ResolutionController.TOP, 50);
 			ResolutionController.dockObject(_percentageTxt, ResolutionController.LEFT, 50, ResolutionController.TOP, 80);
@@ -83,6 +89,7 @@ package States
 			_scene.removeChild(_percentageTxt);
 			
 			_isGameEnded = false;
+			_isGameBack = false;
 		}
 		
 		private function saveScore():void
@@ -114,7 +121,12 @@ package States
 		private function onBackButtonDown(event:Event):void
 		{
 			if(_isTiming) return;
-			_isGameEnded = true;
+			_isGameBack = true;
+		}
+		
+		public function onIsGameBack():Boolean
+		{
+			return _isGameBack;
 		}
 		
 		public function onIsGameEnded():Boolean

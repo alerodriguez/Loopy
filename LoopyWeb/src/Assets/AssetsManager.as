@@ -34,6 +34,36 @@ package Assets
 		[Embed(source="../../media/fonts/font.fnt", mimeType="application/octet-stream")]
 		public static const PixelSplitterXML:Class;
 		
+		[Embed(source="../../media/fonts/Segoe.png")]
+		public static const SegoeUITexture:Class;
+		
+		[Embed(source="../../media/fonts/Segoe.fnt", mimeType="application/octet-stream")]
+		public static const SegoeUIXML:Class;
+		
+		[Embed(source="../../media/fonts/Tekton.png")]
+		public static const TektonPro_BoldTexture:Class;
+		
+		[Embed(source="../../media/fonts/Tekton.fnt", mimeType="application/octet-stream")]
+		public static const TektonPro_BoldXML:Class;
+		
+		[Embed(source="../../media/fonts/Tekton_Small.png")]
+		public static const TektonPro_SmallTexture:Class;
+		
+		[Embed(source="../../media/fonts/Tekton_Small.fnt", mimeType="application/octet-stream")]
+		public static const TektonPro_SmallXML:Class;
+		
+		[Embed(source="../../media/fonts/Thonburi.png")]
+		public static const ThonburiTexture:Class;
+		
+		[Embed(source="../../media/fonts/Thonburi.fnt", mimeType="application/octet-stream")]
+		public static const ThonburiXML:Class;
+		
+		[Embed(source="../../media/fonts/Thonburi_Small.png")]
+		public static const Thonburi_SmallTexture:Class;
+		
+		[Embed(source="../../media/fonts/Thonburi_Small.fnt", mimeType="application/octet-stream")]
+		public static const Thonburi_SmallXML:Class;
+		
 		[Embed(source="../../config/BoardsConfig.xml", mimeType="application/octet-stream")]
 		public static const BoardsConfigXML:Class;
 		

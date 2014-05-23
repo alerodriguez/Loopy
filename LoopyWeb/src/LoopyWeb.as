@@ -15,7 +15,7 @@ package
 	
 	import utils.ResolutionController;
 	
-	[SWF(frameRate="60", width="1024", height="768", backgroundColor="0xFFFFFF")]
+	[SWF(frameRate="60", width="1024", height="768", backgroundColor="0x000000")]
 	public class LoopyWeb extends Sprite
 	{
 		

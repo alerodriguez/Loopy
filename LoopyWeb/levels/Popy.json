@@ -1,6 +1,7 @@
 {
 	"name" : "Popy",
 	"initialScore" : 180,
+	"goldenSquares" : 3,
 	"verticalPenalization" : -1,
 	"horizontalPenalization" : -3,
 	"normalPrize" : 5,
