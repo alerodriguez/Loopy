@@ -29,6 +29,7 @@ package States
 		private const END_TIMER_TIME:Number = 1000;
 		
 		private var _isGameEnded:Boolean = false;
+		private var _isGameBack:Boolean = false;
 		private var _isTiming:Boolean = false;
 		private var _board:Board;
 		private var _scoreTxt:NumberTextField;
@@ -83,6 +84,7 @@ package States
 			_scene.removeChild(_percentageTxt);
 			
 			_isGameEnded = false;
+			_isGameBack = false;
 		}
 		
 		private function saveScore():void
@@ -114,7 +116,12 @@ package States
 		private function onBackButtonDown(event:Event):void
 		{
 			if(_isTiming) return;
-			_isGameEnded = true;
+			_isGameBack = true;
+		}
+		
+		public function onIsGameBack():Boolean
+		{
+			return _isGameBack;
 		}
 		
 		public function onIsGameEnded():Boolean

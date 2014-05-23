@@ -53,7 +53,7 @@ package Board
 		
 		public function set Type(value:int):void
 		{
-			_yPosition = _type;
+			_type = value;
 		}
 		
 		public function get IsCorrect():Boolean

@@ -1,6 +1,7 @@
 {
 	"name" : "Ciclo Madre",
 	"initialScore" : 232,
+	"goldenSquares" : 1,
 	"verticalPenalization" : -1,
 	"horizontalPenalization" : -3,
 	"normalPrize" : 5,

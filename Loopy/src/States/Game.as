@@ -42,6 +42,7 @@ package States
 			_fSMManager.addTransition(_createScene, _splashScene, _createScene.isSaved);
 			_fSMManager.addTransition(_mainMenu, _gameScene, _mainMenu.play);
 			_fSMManager.addTransition(_mainMenu, _splashScene, _mainMenu.back);
+			_fSMManager.addTransition(_gameScene, _mainMenu, _gameScene.onIsGameBack);
 			_fSMManager.addTransition(_gameScene, _winScene, _gameScene.onIsGameEnded);
 			_fSMManager.addTransition(_winScene, _mainMenu, _winScene.continueToMain);
 		}

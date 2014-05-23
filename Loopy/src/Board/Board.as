@@ -1,7 +1,5 @@
 package Board
 {	
-	import flash.text.ReturnKeyLabel;
-	
 	import starling.display.DisplayObjectContainer;
 
 	public class Board extends DisplayObjectContainer
@@ -26,6 +24,7 @@ package Board
 		private var _CantidadActual:Number = 0;
 		private var _completionTableSize:Number = 16;
 		private var _completionTable:Array;
+		private var _goldenSquaresAmount:Number;
 		
 		public function get IsPaused():Boolean
 		{
@@ -49,7 +48,7 @@ package Board
 		
 		public function Board(changeTextFunction:Function)
 		{
-			_changeTextFunction = changeTextFunction;	
+			_changeTextFunction = changeTextFunction;
 			Initialize();
 		}
 		
@@ -68,6 +67,7 @@ package Board
 			_maxCompletionPercentage = table.maxCompletionPercentage;
 			_completionTableSize = table.completionTableSize;
 			_completionTable = table.completionTable;
+			_goldenSquaresAmount = table.goldenSquares;
 			
 			FillBoard();
 			addGoldenSquare();
@@ -149,7 +149,7 @@ package Board
 			var posX:Number = 0;
 			var posY:Number = 0;
 			var vacio:Boolean;
-			var amount:Number = 5;
+			var amount:Number = _goldenSquaresAmount;
 			var correctPositions:Array = new Array();
 			for (var i:int = 0; i < 8; i++) 
 			{
