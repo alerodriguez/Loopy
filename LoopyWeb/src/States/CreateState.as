@@ -249,12 +249,12 @@ package States
 			jsonObject.name = _titleTxt.text != "" ? _titleTxt.text : "Sin Titulo";
 			jsonObject.initialScore = parseInt(_startScoreTxt.text);
 			jsonObject.goldenSquares = parseInt("1");
-			jsonObject.verticalPenalization = parseInt(_vPenalizationTxt.text);
-			jsonObject.horizontalPenalization = parseInt(_hPenalizationTxt.text);
+			jsonObject.verticalPenalization = parseInt(_vPenalizationTxt.text) * -1;
+			jsonObject.horizontalPenalization = parseInt(_hPenalizationTxt.text) * -1;
 			jsonObject.normalPrize = parseInt(_nBonificationTxt.text);
-			jsonObject.normalPenalization = parseInt(_nPenalizationTxt.text);
+			jsonObject.normalPenalization = parseInt(_nPenalizationTxt.text) * -1;
 			jsonObject.goldenPrize = parseInt(_gBonificationTxt.text);
-			jsonObject.goldenPenalization = parseInt(_gPenalizationTxt.text);
+			jsonObject.goldenPenalization = parseInt(_gPenalizationTxt.text) * -1;
 			jsonObject.minCompletionPercentage = parseInt(_minPercentageTxt.text);
 			jsonObject.maxCompletionPercentage = parseInt(_maxPercentageTxt.text);
 			jsonObject.completionTableSize = 0;
