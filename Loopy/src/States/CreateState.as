@@ -162,18 +162,18 @@ package States
 			_gBonificationTxt.textEditorProperties.maxChars = 3;
 			_gPenalizationTxt.textEditorProperties.maxChars = 3;
 			
-			ResolutionController.dockObject(_board, ResolutionController.CENTER, 0, ResolutionController.CENTER, 0);
+			ResolutionController.dockObject(_board, ResolutionController.CENTER, 0, ResolutionController.CENTER, 50);
 			ResolutionController.dockObject(_saveBtn, ResolutionController.RIGHT, -50, ResolutionController.BOTTOM, -50);
 			ResolutionController.dockObject(_titleTxt, ResolutionController.CENTER, 0, ResolutionController.TOP, 30);
-			ResolutionController.dockObject(_startScoreTxt, ResolutionController.LEFT, 130, ResolutionController.TOP, 55);
-			ResolutionController.dockObject(_minPercentageTxt, ResolutionController.LEFT, 130, ResolutionController.TOP, 85);
-			ResolutionController.dockObject(_maxPercentageTxt, ResolutionController.LEFT, 130, ResolutionController.TOP, 115);
-			ResolutionController.dockObject(_hPenalizationTxt, ResolutionController.LEFT, 130, ResolutionController.TOP, 145);
-			ResolutionController.dockObject(_vPenalizationTxt, ResolutionController.LEFT, 130, ResolutionController.TOP, 175);
-			ResolutionController.dockObject(_nBonificationTxt, ResolutionController.LEFT, 130, ResolutionController.TOP, 205);
-			ResolutionController.dockObject(_nPenalizationTxt, ResolutionController.LEFT, 130, ResolutionController.TOP, 235);
-			ResolutionController.dockObject(_gBonificationTxt, ResolutionController.LEFT, 130, ResolutionController.TOP, 265);
-			ResolutionController.dockObject(_gPenalizationTxt, ResolutionController.LEFT, 130, ResolutionController.TOP, 295);
+			ResolutionController.dockObject(_startScoreTxt, ResolutionController.LEFT, 140, ResolutionController.TOP, 55);
+			ResolutionController.dockObject(_minPercentageTxt, ResolutionController.LEFT, 140, ResolutionController.TOP, 85);
+			ResolutionController.dockObject(_maxPercentageTxt, ResolutionController.LEFT, 140, ResolutionController.TOP, 115);
+			ResolutionController.dockObject(_hPenalizationTxt, ResolutionController.LEFT, 140, ResolutionController.TOP, 145);
+			ResolutionController.dockObject(_vPenalizationTxt, ResolutionController.LEFT, 140, ResolutionController.TOP, 175);
+			ResolutionController.dockObject(_nBonificationTxt, ResolutionController.LEFT, 140, ResolutionController.TOP, 205);
+			ResolutionController.dockObject(_nPenalizationTxt, ResolutionController.LEFT, 140, ResolutionController.TOP, 235);
+			ResolutionController.dockObject(_gBonificationTxt, ResolutionController.LEFT, 140, ResolutionController.TOP, 265);
+			ResolutionController.dockObject(_gPenalizationTxt, ResolutionController.LEFT, 140, ResolutionController.TOP, 295);
 		}
 		
 		public override function onExit():void

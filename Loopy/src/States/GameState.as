@@ -71,7 +71,7 @@ package States
 			_scene.addChild(_scoreTxt);
 			_scene.addChild(_percentageTxt);
 			
-			ResolutionController.dockObject(_board, ResolutionController.CENTER, 0, ResolutionController.CENTER, 0);
+			ResolutionController.dockObject(_board, ResolutionController.CENTER, 0, ResolutionController.CENTER, 50);
 			ResolutionController.dockObject(_backBtn, ResolutionController.RIGHT, -50, ResolutionController.BOTTOM, -50);
 			ResolutionController.dockObject(_titleTxt, ResolutionController.CENTER, 0, ResolutionController.TOP, 10);
 			ResolutionController.dockObject(_scoreTxt, ResolutionController.LEFT, 50, ResolutionController.TOP, 50);
